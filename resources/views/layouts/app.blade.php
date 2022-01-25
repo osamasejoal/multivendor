@@ -13,10 +13,15 @@
     <link rel="shortcut icon" href="{{ asset('backend') }}/assets/images/favicon.ico">
 
     <!-- App css -->
+    {{-- Bootstrap 4 --}}
     <link href="{{ asset('backend') }}/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend') }}/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend') }}/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend') }}/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+
+    @yield('main-style-content')
+
 
     <script src="{{ asset('backend') }}/assets/js/modernizr.min.js"></script>
 
@@ -63,9 +68,9 @@
                         <!--<li class="menu-title">Navigation</li>-->
 
                         <li>
-                            <a href="index.html">
-                                <i class="fi-air-play"></i><span
-                                    class="badge badge-danger badge-pill pull-right">7</span> <span> Dashboard </span>
+                            <a href="{{route('home')}}">
+                                <i class="fi-air-play"></i>
+                                Dashboard
                             </a>
                         </li>
 
@@ -394,6 +399,8 @@
     <!-- App js -->
     <script src="{{ asset('backend') }}/assets/js/jquery.core.js"></script>
     <script src="{{ asset('backend') }}/assets/js/jquery.app.js"></script>
+
+    @yield('main-script-content')
 
 </body>
 
