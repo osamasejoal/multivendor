@@ -34,6 +34,7 @@
                         type="text">
                     <label style="margin-bottom: 2rem" class="label" for="name">Name</label>
                 </div>
+
                 @error('name')
                     <span style="margin-top: -30px" class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                 @enderror
@@ -43,6 +44,7 @@
                         type="text">
                     <label style="margin-bottom: 2rem" class="label" for="email">Email</label>
                 </div>
+
                 @error('email')
                     <span style="margin-top: -30px" class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                 @enderror
@@ -58,7 +60,8 @@
                     <label style="margin-bottom: 2rem" class="label" for="image">Choose your Profile
                         picture</label>
                 </div>
-                @error('profile-pic')
+
+                @error('image')
                     <span style="margin-top: -35px" class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                 @enderror
 

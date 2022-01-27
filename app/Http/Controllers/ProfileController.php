@@ -14,6 +14,18 @@ class ProfileController extends Controller
     }
 
     public function update(Request $request){
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required | email',
+            'image' => 'image | mimes:png,jpg,jpeg',
+        ], [
+            'name.required' => 'Name is required',
+            'email.required' => 'Email is required',
+            'email.email' => 'Please enter a valid email',
+            'image.image' => 'Please choose a image file',
+            'image.mimes' => 'It can be png, jpg or jpeg file',
+        ]);
         
         if ($request->hasFile('image')) {
             if (auth()->user()->image != 'default.png') {
@@ -22,8 +34,7 @@ class ProfileController extends Controller
             $img = Image::make($request->image);
             $img_name = auth()->id() . auth()->user()->name . Str::random('5') . "." . $request->image->getClientOriginalExtension();
             $img->save(base_path('public/backend/assets/images/profile-pic/' . $img_name));
-            // return auth()->id();
-            // die();
+
             User::find(auth()->id())->update([
                 'image' => $img_name,
             ]);
@@ -35,6 +46,6 @@ class ProfileController extends Controller
             'email' => $request->email,
         ]);
 
-        return back();
+        return back()->with('success', "Successfully updated your data");
     }
 }

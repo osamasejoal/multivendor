@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController, ProfileController, FrontendController};
+use App\Http\Controllers\{HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController};
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +44,7 @@ Route::post('/users/profile/update', [ProfileController::class, 'update'])->name
 
 
 
+
 /*
 |--------------------------------------------------------------------------
 | FrontendController
@@ -51,4 +52,39 @@ Route::post('/users/profile/update', [ProfileController::class, 'update'])->name
 */
 //
 Route::get('/', [FrontendController::class, 'frontpage'])->name('frontpage');
-Route::resource('users', FrontendController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CategoryController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('category', CategoryController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| SubCategoryController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('sub-category', SubCategoryController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| SubCategoryController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('product', ProductController::class);

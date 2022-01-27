@@ -22,8 +22,18 @@
 }
 
 .contact-form .form-field {
+  display: flex;
+  flex-direction: column;
   position: relative;
-  margin: 32px 0;
+  margin: 20px 0;
+}
+.contact-form textarea {
+  border-width: 0 0 2px 0;
+  border-color: #5543ca;
+  border-radius: 0;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
 }
 .contact-form .input-text {
   display: block;
@@ -48,7 +58,9 @@ input{
   background-color: aliceblue;
 }
 .contact-form .label {
-  position: absolute;
+  /* margin-bottom: 2rem; */
+  /* position: absolute; */
+  text-align: left;
   left: 20px;
   bottom: 11px;
   font-size: 18px;
@@ -73,6 +85,7 @@ input{
   border: none;
   width:200px;
   cursor: pointer;
+  margin: auto;
 }
 
 .custom-button{

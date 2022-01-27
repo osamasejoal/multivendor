@@ -75,11 +75,29 @@
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);"><i class="fi-layers"></i> <span> Apps </span> <span
+                            <a href="javascript: void(0);"><i class="fi-layers"></i> <span> Category </span> <span
                                     class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="apps-calendar.html">Calendar</a></li>
-                                <li><a href="apps-tickets.html">Tickets</a></li>
+                                <li><a href="{{route('category.create')}}">Add Category</a></li>
+                                <li><a href="{{route('category.index')}}">View Category</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);"><i class="icon-drawar"></i> <span>Sub Category </span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="{{route('sub-category.create')}}">Add Sub category</a></li>
+                                <li><a href="{{route('sub-category.index')}}">View Sub category</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);"><i class=" icon-ghost"></i> <span>Product</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="{{route('product.create')}}">Add Product</a></li>
+                                <li><a href="{{route('product.index')}}">View Product</a></li>
                             </ul>
                         </li>
 
