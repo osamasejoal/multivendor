@@ -6,17 +6,25 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
+
+
+
+
+    //========================================
+    // INDEX method for view product data
+    //========================================
     public function index()
     {
-        //
+        $products = Product::all();
+        return view('backend.product.view', compact('products'));
     }
 
 
@@ -33,62 +41,155 @@ class ProductController extends Controller
         return view('backend.product.add' , compact('categories' , 'sub_categories'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+
+    //========================================
+    // STORE method for creating product data
+    //========================================
     public function store(Request $request)
     {
         $request->validate([
-            
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
             'name' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'description' => 'required',
+            'short_desc' => 'required',
+            'image' => 'required|image|mimes:png,jpg,jpeg',
+            'status' => 'required',
+        ], [
+            'category_id.required' => 'Category name is required',
+            'sub_category_id.required' => 'Sub Category name is required',
+            'name.required' => 'Product name is required',
+            'price.required' => 'Price rate is required',
+            'price.numeric' => 'It must be numeric',
+            'quantity.required' => 'Product quantity is required',
+            'quantity.numeric' => 'It must be numeric',
+            'description.required' => 'Description is required',
+            'short_desc.required' => 'Short description is required',
+            'image.required' => 'Product Image is required',
+            'image.image' => 'Please choose a image file',
+            'image.mimes' => 'Image extension can be png, jpg, jpeg',
+            'status.required' => 'Product status is required',
         ]);
+
+        $img = Image::make($request->image);
+        $img_name = auth()->id() . auth()->user()->name . Str::random('5') . '.' . $request->image->getClientOriginalExtension();
+        $img->save(base_path('public/backend/assets/images/product-img/' . $img_name));
+
+        Product::insert([
+            'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'description' => $request->description,
+            'short_desc' => $request->short_desc,
+            'image' => $img_name,
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success' , 'Successfully create your Product');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+
+
+
+
+
     public function show(Product $product)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+
+
+
+
+    //========================================
+    // EDIT method for updating product data
+    //========================================
+    public function edit($id)
     {
-        //
+        $categories = Category::all();
+        $sub_categories = SubCategory::all();
+        $products = Product::find($id);
+        return view('backend.product.edit', compact('products' , 'sub_categories', 'categories'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
+
+
+
+
+    //========================================
+    // UPDATE method for updating product data
+    //========================================
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category_id' => 'required',
+            'sub_category_id' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'quantity' => 'required|numeric',
+            'description' => 'required',
+            'short_desc' => 'required',
+            'image' => 'image|mimes:png,jpg,jpeg',
+            'status' => 'required',
+        ], [
+            'category_id.required' => 'Category name is required',
+            'sub_category_id.required' => 'Sub Category name is required',
+            'name.required' => 'Product name is required',
+            'price.required' => 'Price rate is required',
+            'price.numeric' => 'It must be numeric',
+            'quantity.required' => 'Product quantity is required',
+            'quantity.numeric' => 'It must be numeric',
+            'description.required' => 'Description is required',
+            'short_desc.required' => 'Short description is required',
+            'image.image' => 'Please choose a image file',
+            'image.mimes' => 'Image extension can be png, jpg, jpeg',
+            'status.required' => 'Product status is required',
+        ]);
+
+        if ($request->hasFile('image')) {
+            unlink(base_path('public/backend/assets/images/product-img/' . Product::find($id)->image));
+            $img = Image::make($request->image);
+            $img_name = auth()->id() . auth()->user()->name . Str::random('5') . '.' . $request->image->getClientOriginalExtension();
+            $img->save(base_path('public/backend/assets/images/product-img/' . $img_name));
+
+            Product::find($id)->update([
+                'image' => $img_name,
+            ]);
+
+        }
+
+        Product::find($id)->update([
+            'category_id' => $request->category_id,
+            'sub_category_id' => $request->sub_category_id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'description' => $request->description,
+            'short_desc' => $request->short_desc,
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success', 'Successfully Updated your Product');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
+
+
+
+
+    //========================================
+    // DESTROY method for delete product data
+    //========================================
+    public function destroy($id)
     {
-        //
+        Product::find($id)->delete();
+        return back();
     }
 }

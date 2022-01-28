@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController};
+use App\Models\SubCategory;
+use Facade\FlareClient\Http\Response;
+use Symfony\Component\Console\Input\Input;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,3 +91,14 @@ Route::resource('sub-category', SubCategoryController::class);
 */
 //
 Route::resource('product', ProductController::class);
+
+
+
+
+// Route::get('/ajax-subcat', function(){
+//     $cat_id = Input::get('cat_id');
+
+//     $subcategories = SubCategory::where('category_id', '=', $cat_id)->get();
+    
+//     return Response::json($subcategories);
+// });

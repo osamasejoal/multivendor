@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -89,6 +92,9 @@ class FrontendController extends Controller
     // FRONTPAGE method for view frontpage
     // ===================================
     public function frontpage(){
-        return view('frontend.front-page');
+        $categories = Category::all();
+        $sub_categories = SubCategory::all();
+        $products = Product::all();
+        return view('frontend.front-page', compact('categories', 'sub_categories', 'products'));
     }
 }

@@ -11,5 +11,16 @@ class Product extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     protected $guarded = [];
+
+
+    public function relationToCategory(){
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+
+    public function relationToSubCategory(){
+        return $this->hasOne(SubCategory::class, 'id', 'sub_category_id');
+    }
 }

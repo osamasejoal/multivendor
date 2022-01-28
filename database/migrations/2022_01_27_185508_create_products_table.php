@@ -25,6 +25,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->integer('status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

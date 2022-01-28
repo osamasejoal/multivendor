@@ -155,6 +155,35 @@
 
 
 @section('main-script-content')
+
+    {{-- Jquery CDN --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
+    {{-- END Jquery CDN --}}
+
+
+    {{-- Ajax for category and sub category --}}
+    {{-- <script>
+
+        $('#category_id').on('change', function(e){
+            console.log(e);
+
+            var cat_id = e.target.value;
+
+            // Ajax
+            $.get('/ajax-subcat?cat_id=' + cat_id, function(data){
+                // success data
+                $('#sub_category_id').empty();
+
+                $.each(data, function(index, subcatObj){
+
+                    $('#sub_category_id').append('<option value="'+subcatObj.id+'">'+subcatObj.name+'</option>');
+
+                });
+            });
+        });
+
+    </script> --}}
+    {{-- END Ajax for category and sub category --}}
     {{-- Script for Form in Banner/Edit --}}
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
