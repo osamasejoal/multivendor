@@ -79,7 +79,7 @@
                                     <img src="{{ asset('backend/assets/images/category-img/' . $category->image) }}"
                                         alt="">
                                     <div class="featured-content">
-                                        <a href="shop.html">{{ $category->name }}</a>
+                                        <a href="{{route('category.product', $category->id)}}">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -104,6 +104,9 @@
                         <div class="count-down-clock text-center">
                             <div id="clock">
                             </div>
+                        </div>
+                        <div class="text-center mt-5">
+                            <a href="{{route('deal.day')}}" class="btn btn-warning btn-lg">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -260,21 +263,49 @@
                         <div class="product-wrap">
                             <div class="product-img">
                                 <span>Sale</span>
-                                <img src="{{ asset('backend/assets/images/product-img/' . $product->image) }}"
-                                    alt="">
+                                <img src="{{ asset('backend/assets/images/product-img/' . $product->image) }}" alt="">
                                 <div class="product-icon flex-style">
                                     <ul>
                                         <li><a data-toggle="modal" data-target="#exampleModalCenter"
                                                 href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
-                                        <li><a href="wishlist.html"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="cart.html"><i class="fa fa-shopping-bag"></i></a></li>
+
+                                        @if (wishlist_exist($product->id))
+
+                                            <li><a><i class="fa fa-heart" style="color:yellow"></i></a></li>
+                                                        
+
+                                        @else
+                                            <li><a href="{{ route('add.wishlist', $product->id) }}"><i
+                                                        class="fa fa-heart"></i></a></li>
+                                        @endif
+
+
+                                        @if (cart_exist($product->id))
+                                            <li><a><i class="fa fa-shopping-cart" style="color:yellow"></i></a></li>
+                                        @else
+                                            <li><a href="{{ route('add.cart', $product->id) }}"><i
+                                                    class="fa fa-shopping-cart"></i></a></li>
+                                        @endif
+
+
                                     </ul>
                                 </div>
                             </div>
+                            @if (session('product_id') == $product->id)
+
+                                @if (session('error'))
+                                    <div class="alert alert-danger mt-2">
+                                        <span class="text-danger">
+                                            {{ session('error') }}
+                                        </span>
+                                    </div>
+                                @endif
+
+                            @endif
                             <div class="product-content">
-                                <h3><a href="single-product.html">{{$product->name}}</a></h3>
+                                <h3><a href="{{route('single.product', $product->id)}}">{{ $product->name }}</a></h3>
                                 <p class="pull-left">
-                                    {{'$' . $product->price}}
+                                    {{ '$' . $product->price }}
                                 </p>
                                 <ul class="pull-right d-flex">
                                     <li><i class="fa fa-star"></i></li>

@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->text('short_desc');
             $table->string('image');
             $table->integer('status');
+            $table->integer('deal');
+            $table->integer('discount')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

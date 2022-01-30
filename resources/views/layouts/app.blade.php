@@ -303,6 +303,11 @@
                                 </div>
 
                                 <!-- item-->
+                                <a href="{{route('frontpage')}}" class="dropdown-item notify-item">
+                                    <i class="icon-directions"></i> <span>Front Page</span>
+                                </a>
+
+                                <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item notify-item">
                                     <i class="fi-head"></i> <span>My Account</span>
                                 </a>

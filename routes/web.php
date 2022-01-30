@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, };
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -56,6 +56,12 @@ Route::post('/users/profile/update', [ProfileController::class, 'update'])->name
 //
 Route::get('/', [FrontendController::class, 'frontpage'])->name('frontpage');
 
+Route::get('/category/wise/product/{id}', [FrontendController::class, 'categoryProduct'])->name('category.product');
+
+Route::get('/single/product/{id}', [FrontendController::class, 'productPage'])->name('single.product');
+
+Route::get('/deal/of/the/day', [FrontendController::class, 'dealOfTheDay'])->name('deal.day');
+
 
 
 
@@ -91,6 +97,33 @@ Route::resource('sub-category', SubCategoryController::class);
 */
 //
 Route::resource('product', ProductController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CartController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('cart', CartController::class);
+
+Route::get('/cart/add/{id}', [CartController::class, 'custom'])->name('add.cart');
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| WishlistController
+|--------------------------------------------------------------------------
+*/
+//
+Route::get('/wishlist/add/{id}', [WishlistController::class, 'index'])->name('add.wishlist');
+
 
 
 

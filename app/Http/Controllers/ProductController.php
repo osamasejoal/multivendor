@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class ProductController extends Controller
 {
@@ -60,6 +61,7 @@ class ProductController extends Controller
             'short_desc' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg',
             'status' => 'required',
+            'deal' => 'required',
         ], [
             'category_id.required' => 'Category name is required',
             'sub_category_id.required' => 'Sub Category name is required',
@@ -74,6 +76,7 @@ class ProductController extends Controller
             'image.image' => 'Please choose a image file',
             'image.mimes' => 'Image extension can be png, jpg, jpeg',
             'status.required' => 'Product status is required',
+            'deal.required' => 'Deal of the Day field is required',
         ]);
 
         $img = Image::make($request->image);
@@ -90,6 +93,8 @@ class ProductController extends Controller
             'short_desc' => $request->short_desc,
             'image' => $img_name,
             'status' => $request->status,
+            'deal' => $request->deal,
+            'discount' => $request->discount,
         ]);
 
         return back()->with('success' , 'Successfully create your Product');
@@ -139,6 +144,7 @@ class ProductController extends Controller
             'short_desc' => 'required',
             'image' => 'image|mimes:png,jpg,jpeg',
             'status' => 'required',
+            'deal' => 'required',
         ], [
             'category_id.required' => 'Category name is required',
             'sub_category_id.required' => 'Sub Category name is required',
@@ -152,6 +158,7 @@ class ProductController extends Controller
             'image.image' => 'Please choose a image file',
             'image.mimes' => 'Image extension can be png, jpg, jpeg',
             'status.required' => 'Product status is required',
+            'deal.required' => 'Deal of the Day field is required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -175,6 +182,8 @@ class ProductController extends Controller
             'description' => $request->description,
             'short_desc' => $request->short_desc,
             'status' => $request->status,
+            'deal' => $request->deal,
+            'discount' => $request->discount,
         ]);
 
         return back()->with('success', 'Successfully Updated your Product');

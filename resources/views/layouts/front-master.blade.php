@@ -61,8 +61,8 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <ul class="d-flex header-contact">
-                            <li><i class="fa fa-phone"></i> +01 123 456 789</li>
-                            <li><i class="fa fa-envelope"></i> youremail@gmail.com</li>
+                            <li><i class="fa fa-phone"></i>{{$company_info->phone}}</li>
+                            <li><i class="fa fa-envelope"></i>{{$company_info->email}}</li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-12">
@@ -101,15 +101,18 @@
                 <div class="row">
                     <div class="col-lg-3 col-md-7 col-sm-6 col-6">
                         <div class="logo">
-                            <a href="index.html">
-                                <img src="{{ asset('frontend/assets') }}/images/logo.png" alt="">
+                            <a href="{{ route('frontpage') }}">
+                                <img src="{{asset('backend/assets/images/company-logo/' . $company_info->logo)}}" alt="">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-7 d-none d-lg-block">
                         <nav class="mainmenu">
                             <ul class="d-flex">
-                                <li class="active"><a href="index.html">Home</a></li>
+                                @auth
+                                    <li><a href="{{ route('home') }}">Dashboard</a></li>
+                                @endauth
+                                <li class="active"><a href="{{ route('frontpage') }}">Home</a></li>
                                 <li><a href="about.html">About</a></li>
                                 <li>
                                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
@@ -147,79 +150,139 @@
                         <ul class="search-cart-wrapper d-flex">
                             <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="flaticon-like"></i> <span>2</span></a>
-                                <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/assets') }}/images/cart/1.jpg" alt="">
+
+
+
+                            @auth
+
+                                <li>
+
+
+                                    <a href="javascript:void(0);"><i class="flaticon-like"></i>
+
+                                        @if (count(wishlists()) != 0)
+                                            <span>{{ count(wishlists()) }}</span>
+                                        @endif
+
+                                    </a>
+
+
+
+                                    <ul class="cart-wrap dropdown_style">
+
+                                        @forelse (wishlists() as $wishlist)
+
+                                            <li class="cart-items">
+                                                <div class="cart-img">
+                                                    <img width="50px"
+                                                        src="{{ asset('backend/assets/images/product-img/' . $wishlist->relationToProduct->image) }}"
+                                                        alt="">
+                                                </div>
+                                                <div class="cart-content">
+                                                    <a href="cart.html">{{ $wishlist->relationToProduct->name }}</a>
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+                                            </li>
+
+                                        @empty
+                                            <li class="cart-items">
+                                                <div class="cart-content text-danger text-center" style="font-size: 18px">
+                                                    EMPTY!</div>
+                                            </li>
+                                        @endforelse
+
+
+                                        @if (count(wishlists()) != 0)
+                                            <li>
+                                                <button>Check Out</button>
+                                            </li>
+                                        @endif
+
+
+
+                                    </ul>
+                                </li>
+
+                            @else
+
+                                <li>
+                                    <a href="javascript:void(0);"><i class="flaticon-like"></i></a>
+                                    <ul class="cart-wrap dropdown_style">
+                                        <div class="alert alert-danger">
+                                            You are not logged in!
                                         </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
+                                    </ul>
+                                </li>
+
+                            @endauth
+
+
+
+                            @auth
+
+                                <li>
+
+                                    <a href="javascript:void(0);"><i class="flaticon-shop"></i>
+
+                                        @if (count(carts()) != 0)
+                                            <span>{{ carts()->count() }}</span>
+                                        @endif
+
+                                    </a>
+
+                                    <ul class="cart-wrap dropdown_style">
+
+                                        @forelse (carts() as $cart)
+                                            <li class="cart-items">
+
+                                                <div class="cart-img">
+                                                    <img width="50px"
+                                                        src="{{ asset('backend/assets/images/product-img/' . $cart->relationToProduct->image) }}"
+                                                        alt="">
+                                                </div>
+
+                                                <div class="cart-content">
+                                                    <a href="cart.html">{{ $cart->relationToProduct->name }}</a>
+                                                    <span>QTY : {{ $cart->amount }}</span>
+                                                    <p>{{ '$' . $cart->relationToProduct->price }}</p>
+                                                    <i class="fa fa-times"></i>
+                                                </div>
+
+                                            </li>
+
+                                        @empty
+
+                                            <li class="cart-items">
+                                                <div class="cart-content text-danger text-center" style="font-size: 18px">
+                                                    EMPTY!</div>
+                                            </li>
+
+                                        @endforelse
+
+                                        @if (count(carts()) != 0)
+                                            <li>
+                                                <button>Check Out</button>
+                                            </li>
+                                        @endif
+
+                                    </ul>
+                                </li>
+
+                            @else
+
+                                <li>
+                                    <a href="javascript:void(0);"><i class="flaticon-shop"></i></a>
+                                    <ul class="cart-wrap dropdown_style">
+                                        <div class="alert alert-danger">
+                                            You are not Logged in!
                                         </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/assets') }}/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
-                                <ul class="cart-wrap dropdown_style">
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/assets') }}/images/cart/1.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/assets') }}/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="{{ asset('frontend/assets') }}/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
-                                    <li>
-                                        <button>Check Out</button>
-                                    </li>
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
+
+                            @endauth
+
+
+
                         </ul>
                     </div>
                     <div class="col-md-1 col-sm-1 col-2 d-block d-lg-none">
@@ -354,9 +417,9 @@
                     <div class="col-lg-3 col-md-8 col-sm-12">
                         <div class="footer-adress">
                             <ul>
-                                <li><a href="#"><span>Email:</span> domain@gmail.com</a></li>
-                                <li><a href="#"><span>Tel:</span> 0131234567</a></li>
-                                <li><a href="#"><span>Adress:</span> 52 Web Bangale , Adress line2 , ip:3105</a></li>
+                                <li><a href="#"><span>Email:</span>&nbsp;{{$company_info->email}}</a></li>
+                                <li><a href="#"><span>Tel:</span>&nbsp;{{$company_info->phone}}</a></li>
+                                <li><a href="#"><span>Adress:</span>&nbsp;{{$company_info->address}}</a></li>
                             </ul>
                         </div>
                     </div>

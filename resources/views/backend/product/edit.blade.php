@@ -107,6 +107,34 @@
 
 
 
+                <div class="form-field col-lg-6">
+                    <label class="label" for="deal">Deal of the Day</label>
+                    <select style="background-color: aliceblue" name="deal" id="deal" class="input-text js-input">
+                        <option value="">-- Deal of the Day --</option>
+
+                        <option value="1" {{$products->deal == 1 ? 'selected' : ''}}>On</option>
+                        <option value="0" {{$products->deal == 0 ? 'selected' : ''}}>Off</option>
+                    </select>
+
+
+                    @error('deal')
+                        <span class="text-danger text-left">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
+                <div class="form-field col-lg-6">
+                    <label class="label" for="discount">Product Discount</label>
+                    <input value="{{$products->discount}}" name="discount" id="discount" class="input-text js-input" type="number">
+
+
+                    @error('discount')
+                        <span class="text-danger text-left">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
+
                 <div class="form-field col-lg-12 ">
                     <label class="label" for="short_desc">Short Description</label>
                     <textarea style="background-color: aliceblue" name="short_desc" id="short_desc" cols="30" rows="2">{{$products->short_desc}}</textarea>
