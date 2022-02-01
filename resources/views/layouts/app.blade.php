@@ -100,6 +100,16 @@
                                 <li><a href="{{route('product.index')}}">View Product</a></li>
                             </ul>
                         </li>
+                        
+                        <li>
+                            <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="{{route('edit.company')}}">Company Profile</a></li>
+                                <li><a href="{{route('company-social.create')}}">Add Social Media</a></li>
+                                <li><a href="{{route('company-social.index')}}">View Social Media</a></li>
+                            </ul>
+                        </li>
 
                         <li>
                             <a href="{{ route('logout') }}"

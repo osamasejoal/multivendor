@@ -30,9 +30,9 @@
                 class="contact-form row m-auto">
                 @csrf
                 <div class="form-field col-lg-6">
+                    <label class="label" for="name">Name</label>
                     <input value="{{ auth()->user()->name }}" name="name" id="name" class="input-text js-input"
                         type="text">
-                    <label style="margin-bottom: 2rem" class="label" for="name">Name</label>
                 </div>
 
                 @error('name')
@@ -40,9 +40,9 @@
                 @enderror
 
                 <div class="form-field col-lg-12 ">
+                    <label class="label" for="email">Email</label>
                     <input value="{{ auth()->user()->email }}" name="email" id="email" class="input-text js-input"
                         type="text">
-                    <label style="margin-bottom: 2rem" class="label" for="email">Email</label>
                 </div>
 
                 @error('email')
@@ -50,15 +50,15 @@
                 @enderror
 
                 <div class="form-field col-lg-12">
-                    <img style="border-radius: 50%" width="100px" src="{{asset('backend/assets/images/profile-pic') .'/' . auth()->user()->image}}" alt="" id="previous_img">
-                    <label style="margin-bottom: 30px" class="label" for="previous_img">Previous
+                    <label class="label" for="previous_img">Previous
                         Image</label>
+                    <img style="border-radius: 50%" width="100px" src="{{asset('backend/assets/images/profile-pic') .'/' . auth()->user()->image}}" alt="" id="previous_img">
                 </div>
 
                 <div class="form-field col-lg-6">
-                    <input name="image" id="image" class="input-text js-input" type="file">
-                    <label style="margin-bottom: 2rem" class="label" for="image">Choose your Profile
+                    <label class="label" for="image">Choose your Profile
                         picture</label>
+                    <input name="image" id="image" class="input-text js-input" type="file">
                 </div>
 
                 @error('image')

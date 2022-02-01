@@ -85,9 +85,8 @@ class FrontendController extends Controller
         $categories = Category::all();
         $sub_categories = SubCategory::all();
         $products = Product::all();
-        $company_info = CompanyInfo::all()->first();
 
-        return view('frontend.front-page', compact('categories', 'sub_categories', 'products', 'company_info'));
+        return view('frontend.front-page', compact('categories', 'sub_categories', 'products'));
     }
     
 

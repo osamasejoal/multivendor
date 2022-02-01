@@ -61,8 +61,8 @@
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <ul class="d-flex header-contact">
-                            <li><i class="fa fa-phone"></i>{{$company_info->phone}}</li>
-                            <li><i class="fa fa-envelope"></i>{{$company_info->email}}</li>
+                            <li><i class="fa fa-phone"></i>{{company_data()->phone}}</li>
+                            <li><i class="fa fa-envelope"></i>{{company_data()->email}}</li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-12">
@@ -102,7 +102,7 @@
                     <div class="col-lg-3 col-md-7 col-sm-6 col-6">
                         <div class="logo">
                             <a href="{{ route('frontpage') }}">
-                                <img src="{{asset('backend/assets/images/company-logo/' . $company_info->logo)}}" alt="">
+                                <img src="{{asset('backend/assets/images/company-logo/' . company_data()->logo)}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -401,10 +401,9 @@
                     <div class="col-lg-2 col-md-3 col-sm-12">
                         <div class="footer-icon">
                             <ul class="d-flex">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                @foreach (company_social() as $social)
+                                <li><a title="{{$social->name}}" target="blank" href="{{$social->link}}"><i class="{{$social->icon}}"></i></a></li>
+                                @endforeach
                             </ul>
                         </div>
                     </div>
@@ -417,9 +416,9 @@
                     <div class="col-lg-3 col-md-8 col-sm-12">
                         <div class="footer-adress">
                             <ul>
-                                <li><a href="#"><span>Email:</span>&nbsp;{{$company_info->email}}</a></li>
-                                <li><a href="#"><span>Tel:</span>&nbsp;{{$company_info->phone}}</a></li>
-                                <li><a href="#"><span>Adress:</span>&nbsp;{{$company_info->address}}</a></li>
+                                <li><a href="#"><span>Email:</span>&nbsp;{{company_data()->email}}</a></li>
+                                <li><a href="#"><span>Tel:</span>&nbsp;{{company_data()->phone}}</a></li>
+                                <li><a href="#"><span>Adress:</span>&nbsp;{{company_data()->address}}</a></li>
                             </ul>
                         </div>
                     </div>

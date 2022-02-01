@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, };
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -128,10 +128,36 @@ Route::get('/wishlist/add/{id}', [WishlistController::class, 'index'])->name('ad
 
 
 
-// Route::get('/ajax-subcat', function(){
-//     $cat_id = Input::get('cat_id');
+/*
+|--------------------------------------------------------------------------
+| CompanyInfoController
+|--------------------------------------------------------------------------
+*/
+//
+Route::get('/company/profile', [CompanyInfoController::class, 'index'])->name('edit.company');
 
-//     $subcategories = SubCategory::where('category_id', '=', $cat_id)->get();
+Route::post('/company/profile/update/{id}', [CompanyInfoController::class, 'update'])->name('update.company');
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CompanySocialController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('company-social', CompanySocialController::class);
+
+
+
+
+
+// Route::get('/ajax-subcat', function(){
+    //     $cat_id = Input::get('cat_id');
     
-//     return Response::json($subcategories);
-// });
+    //     $subcategories = SubCategory::where('category_id', '=', $cat_id)->get();
+    
+    //     return Response::json($subcategories);
+    // });
