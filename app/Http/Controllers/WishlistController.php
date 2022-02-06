@@ -8,27 +8,47 @@ use Illuminate\Http\Request;
 
 class WishlistController extends Controller
 {
+
+
+
+
+
+    //=================================
+    // INDEX method for add to wishlist
+    //=================================
     public function index($id){
 
-// return ;
-// die();
+        Wishlist::create([
+            'product_id' => $id,
+            'user_id' => auth()->id(),
+            'status' => 1,
+        ]);
 
-        if (Wishlist::where('product_id', $id)->first()) {
-            return back()->with([
-                'error' => 'already exist',
-                'product_id' => $id,
-            ]);
-        }
-        else{
-            Wishlist::create([
-                'product_id' => $id,
-                'user_id' => auth()->id(),
-                'status' => 1,
-            ]);
+        return back();
+    }
+    
 
-            return back();
-        }
+    
 
-        
+
+    //==================================
+    // DELETE method for add to wishlist
+    //==================================
+    public function delete($id){
+        Wishlist::find($id)->delete();
+        return back();
+    }
+
+
+
+
+
+    //===========================================
+    // view method for show to wishlist page
+    //===========================================
+    public function view()
+    {
+        $wishlists = Wishlist::all();
+        return view('frontend.wishlists', compact('wishlists'));
     }
 }

@@ -79,7 +79,8 @@
                                     <img src="{{ asset('backend/assets/images/category-img/' . $category->image) }}"
                                         alt="">
                                     <div class="featured-content">
-                                        <a href="{{route('category.product', $category->id)}}">{{ $category->name }}</a>
+                                        <a
+                                            href="{{ route('category.product', $category->id) }}">{{ $category->name }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +107,7 @@
                             </div>
                         </div>
                         <div class="text-center mt-5">
-                            <a href="{{route('deal.day')}}" class="btn btn-warning btn-lg">Shop Now</a>
+                            <a href="{{ route('deal.day') }}" class="btn btn-warning btn-lg">Shop Now</a>
                         </div>
                     </div>
                 </div>
@@ -269,23 +270,40 @@
                                         <li><a data-toggle="modal" data-target="#exampleModalCenter"
                                                 href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
 
-                                        @if (wishlist_exist($product->id))
+                                        @auth
+                                            @if (wishlist_exist($product->id))
 
-                                            <li><a><i class="fa fa-heart" style="color:yellow"></i></a></li>
-                                                        
-
+                                                <li><a><i class="fa fa-heart" style="color:yellow"></i></a></li>
+                                            @else
+                                                <li><a href="{{ route('add.wishlist', $product->id) }}"><i
+                                                            class="fa fa-heart"></i></a></li>
+                                            @endif
                                         @else
-                                            <li><a href="{{ route('add.wishlist', $product->id) }}"><i
-                                                        class="fa fa-heart"></i></a></li>
-                                        @endif
+                                            <li><a href="{{ route('login') }}"><i class="fa fa-heart"></i></a></li>
+                                        @endauth
 
 
-                                        @if (cart_exist($product->id))
-                                            <li><a><i class="fa fa-shopping-cart" style="color:yellow"></i></a></li>
+
+
+
+                                        {{-- Carts --}}
+                                        @auth
+                                            @if (cart_exist($product->id))
+                                                <li><a><i class="fa fa-shopping-cart" style="color:yellow"></i></a></li>
+                                            @else
+                                                <li><a href="{{ route('add.cart', $product->id) }}"><i
+                                                            class="fa fa-shopping-cart"></i></a></li>
+                                            @endif
                                         @else
-                                            <li><a href="{{ route('add.cart', $product->id) }}"><i
-                                                    class="fa fa-shopping-cart"></i></a></li>
-                                        @endif
+                                            <li><a href="{{ route('login') }}"><i class="fa fa-shopping-cart"></i></a></li>
+                                        @endauth
+
+
+
+
+
+
+
 
 
                                     </ul>
@@ -303,9 +321,13 @@
 
                             @endif
                             <div class="product-content">
-                                <h3><a href="{{route('single.product', $product->id)}}">{{ $product->name }}</a></h3>
+                                @if ($product->quantity == 0)
+                                    <h6 class="pull-right text-danger">Stock out</h6>
+                                @endif
+                                <h3><a href="{{ route('single.product', $product->id) }}">{{ $product->name }}</a>
+                                </h3>
                                 <p class="pull-left">
-                                    {{ '$' . $product->price }}
+                                    ${{ $product->price }}
                                 </p>
                                 <ul class="pull-right d-flex">
                                     <li><i class="fa fa-star"></i></li>

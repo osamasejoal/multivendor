@@ -30,6 +30,9 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/responsive.css">
     <!-- modernizr css -->
     <script src="{{ asset('frontend/assets') }}/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    {{-- @yield(' ') --}}
+
 </head>
 
 <body>
@@ -70,7 +73,7 @@
 
                             @auth
                                 <li>
-                                    <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i
+                                    <a href="javascript:void(0);"><img width="25px" src="{{asset('backend/assets/images/profile-pic/' . auth()->user()->image)}}" alt=""> My Account <i
                                             class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
                                         <li><a href="cart.html">Cart</a></li>
@@ -156,18 +159,13 @@
                             @auth
 
                                 <li>
-
-
-                                    <a href="javascript:void(0);"><i class="flaticon-like"></i>
+                                    <a href="{{route('view.wishlist')}}"><i class="flaticon-like"></i>
 
                                         @if (count(wishlists()) != 0)
                                             <span>{{ count(wishlists()) }}</span>
                                         @endif
 
                                     </a>
-
-
-
                                     <ul class="cart-wrap dropdown_style">
 
                                         @forelse (wishlists() as $wishlist)
@@ -180,25 +178,20 @@
                                                 </div>
                                                 <div class="cart-content">
                                                     <a href="cart.html">{{ $wishlist->relationToProduct->name }}</a>
-                                                    <i class="fa fa-times"></i>
+                                                    <a href="{{route('delete.wishlist', $wishlist->id)}}">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
                                                 </div>
                                             </li>
 
                                         @empty
+
                                             <li class="cart-items">
                                                 <div class="cart-content text-danger text-center" style="font-size: 18px">
                                                     EMPTY!</div>
                                             </li>
+
                                         @endforelse
-
-
-                                        @if (count(wishlists()) != 0)
-                                            <li>
-                                                <button>Check Out</button>
-                                            </li>
-                                        @endif
-
-
 
                                     </ul>
                                 </li>
@@ -206,7 +199,7 @@
                             @else
 
                                 <li>
-                                    <a href="javascript:void(0);"><i class="flaticon-like"></i></a>
+                                    <a href="#"><i class="flaticon-like"></i></a>
                                     <ul class="cart-wrap dropdown_style">
                                         <div class="alert alert-danger">
                                             You are not logged in!
@@ -221,15 +214,13 @@
                             @auth
 
                                 <li>
-
-                                    <a href="javascript:void(0);"><i class="flaticon-shop"></i>
+                                    <a href="{{route('view.carts')}}"><i class="flaticon-shop"></i>
 
                                         @if (count(carts()) != 0)
                                             <span>{{ carts()->count() }}</span>
                                         @endif
 
                                     </a>
-
                                     <ul class="cart-wrap dropdown_style">
 
                                         @forelse (carts() as $cart)
@@ -245,7 +236,9 @@
                                                     <a href="cart.html">{{ $cart->relationToProduct->name }}</a>
                                                     <span>QTY : {{ $cart->amount }}</span>
                                                     <p>{{ '$' . $cart->relationToProduct->price }}</p>
-                                                    <i class="fa fa-times"></i>
+                                                    <a href="{{route('delete.cart', $cart->id)}}">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
                                                 </div>
 
                                             </li>
@@ -512,6 +505,9 @@
     <script src="{{ asset('frontend/assets') }}/js/jquery-ui.min.js"></script>
     <!-- main js -->
     <script src="{{ asset('frontend/assets') }}/js/scripts.js"></script>
+
+    @yield('front-footer')
+
 </body>
 
 

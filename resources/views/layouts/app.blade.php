@@ -68,7 +68,7 @@
                         <!--<li class="menu-title">Navigation</li>-->
 
                         <li>
-                            <a href="{{route('home')}}">
+                            <a href="{{ route('home') }}">
                                 <i class="fi-air-play"></i>
                                 Dashboard
                             </a>
@@ -78,17 +78,17 @@
                             <a href="javascript: void(0);"><i class="fi-layers"></i> <span> Category </span> <span
                                     class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{route('category.create')}}">Add Category</a></li>
-                                <li><a href="{{route('category.index')}}">View Category</a></li>
+                                <li><a href="{{ route('category.create') }}">Add Category</a></li>
+                                <li><a href="{{ route('category.index') }}">View Category</a></li>
                             </ul>
                         </li>
 
                         <li>
-                            <a href="javascript: void(0);"><i class="icon-drawar"></i> <span>Sub Category </span> <span
-                                    class="menu-arrow"></span></a>
+                            <a href="javascript: void(0);"><i class="icon-drawar"></i> <span>Sub Category </span>
+                                <span class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{route('sub-category.create')}}">Add Sub category</a></li>
-                                <li><a href="{{route('sub-category.index')}}">View Sub category</a></li>
+                                <li><a href="{{ route('sub-category.create') }}">Add Sub category</a></li>
+                                <li><a href="{{ route('sub-category.index') }}">View Sub category</a></li>
                             </ul>
                         </li>
 
@@ -96,19 +96,39 @@
                             <a href="javascript: void(0);"><i class=" icon-ghost"></i> <span>Product</span> <span
                                     class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{route('product.create')}}">Add Product</a></li>
-                                <li><a href="{{route('product.index')}}">View Product</a></li>
+                                <li><a href="{{ route('product.create') }}">Add Product</a></li>
+                                <li><a href="{{ route('product.index') }}">View Product</a></li>
                             </ul>
                         </li>
-                        
+
                         <li>
                             <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
                                     class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{route('edit.company')}}">Company Profile</a></li>
-                                <li><a href="{{route('company-social.create')}}">Add Social Media</a></li>
-                                <li><a href="{{route('company-social.index')}}">View Social Media</a></li>
+                                <li><a href="{{ route('edit.company') }}">Company Profile</a></li>
+                                <li><a href="{{ route('company-social.create') }}">Add Social Media</a></li>
+                                <li><a href="{{ route('company-social.index') }}">View Social Media</a></li>
                             </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);"><i class="fi-share"></i> <span>Front Design</span>
+                                <span class="menu-arrow"></span></a>
+
+                            <ul class="nav-second-level nav" aria-expanded="false">
+
+                                <li><a href="javascript: void(0);" aria-expanded="false">Banner<span
+                                            class="menu-arrow"></span></a>
+
+                                    <ul class="nav-third-level nav" aria-expanded="false">
+                                        <li><a href="javascript: void(0);">Add Banner</a></li>
+                                        <li><a href="javascript: void(0);">View Banner</a></li>
+                                    </ul>
+
+                                </li>
+
+                            </ul>
+
                         </li>
 
                         <li>
@@ -313,7 +333,7 @@
                                 </div>
 
                                 <!-- item-->
-                                <a href="{{route('frontpage')}}" class="dropdown-item notify-item">
+                                <a href="{{ route('frontpage') }}" class="dropdown-item notify-item">
                                     <i class="icon-directions"></i> <span>Front Page</span>
                                 </a>
 
@@ -323,7 +343,7 @@
                                 </a>
 
                                 <!-- item-->
-                                <a href="{{route('profile.index')}}" class="dropdown-item notify-item">
+                                <a href="{{ route('profile.index') }}" class="dropdown-item notify-item">
                                     <i class="fi-cog"></i> <span>Settings</span>
                                 </a>
 

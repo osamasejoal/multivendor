@@ -107,10 +107,13 @@ Route::resource('product', ProductController::class);
 | CartController
 |--------------------------------------------------------------------------
 */
-//
-Route::resource('cart', CartController::class);
 
-Route::get('/cart/add/{id}', [CartController::class, 'custom'])->name('add.cart');
+Route::get('/cart/add/{id}', [CartController::class, 'index'])->name('add.cart');
+
+Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('delete.cart');
+
+Route::get('/carts/view', [CartController::class, 'view'])->name('view.carts');
+
 
 
 
@@ -123,6 +126,10 @@ Route::get('/cart/add/{id}', [CartController::class, 'custom'])->name('add.cart'
 */
 //
 Route::get('/wishlist/add/{id}', [WishlistController::class, 'index'])->name('add.wishlist');
+
+Route::get('/wishlist/delete/{id}', [WishlistController::class, 'delete'])->name('delete.wishlist');
+
+Route::get('/wishlist/view', [WishlistController::class, 'view'])->name('view.wishlist');
 
 
 
