@@ -835,6 +835,7 @@ header-area start
     overflow: hidden;
 }
 
+
 .slide-inner1 {
     background: url(../images/slider/1.jpg);
 }
@@ -861,6 +862,7 @@ header-area start
 .slide-inner6 {
     background: url(../images/slider/6.html);
 }
+
 .slide-inner{
     position: absolute;
     width: 100%;

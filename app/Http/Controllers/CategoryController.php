@@ -98,9 +98,9 @@ class CategoryController extends Controller
 
 
 
-    //======================================
+    //====================================
     // UPDATE method for update categories
-    //======================================
+    //====================================
     public function update(Request $request,  $id)
     {
 

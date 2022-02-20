@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\CompanyInfo;
 use App\Models\Product;
 use App\Models\SubCategory;
+use App\Models\Testimonial;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
@@ -86,8 +88,10 @@ class FrontendController extends Controller
         $categories = Category::all();
         $sub_categories = SubCategory::all();
         $products = Product::all();
+        $banners = Banner::all();
+        $testimonials = Testimonial::all();
 
-        return view('frontend.front-page', compact('categories', 'sub_categories', 'products'));
+        return view('frontend.front-page', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
     }
     
 

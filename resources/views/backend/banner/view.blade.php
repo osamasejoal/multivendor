@@ -17,47 +17,34 @@
     <section style="margin-top: -50px" class="ftco-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10 m-auto">
                     <div class="table-wrap">
                         <table class="table table-responsive-xl text-center">
                             <thead>
                                 <tr>
                                     <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Category</th>
-                                    <th>Sub Category</th>
-                                    <th>Short desc</th>
+                                    <th>Title</th>
                                     <th>Description</th>
-                                    <th>Status</th>
                                     <th>Action</th>         
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($products as $product)
+                                @foreach ($banners as $banner)
 
                                     <tr class="alert" role="alert">
                                         <td>
                                             <img style="border-radius: 5px"
-                                                src="{{ asset('backend/assets/images/product-img' . '/' . $product->image) }}"
+                                                src="{{ asset('backend/assets/images/banner-img' . '/' . $banner->image) }}"
                                                 alt="img not found" width="150px">
                                         </td>
                                                 
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ '$' . $product->price }}</td>
-                                        <td>{{ $product->quantity }}</td>
-                                        <td>{{ $product->relationToCategory->name }}</td>
-                                        <td>{{ $product->relationToSubCategory->name }}</td>
-                                        <td>{{ $product->short_desc }}</td>
-                                        <td>{{ $product->description }}</td>
-                                        {{-- <td>{{ $product->relationToCategory->name }}</td> --}}
-                                        <td>{{ $product->status == 1 ? 'On' : 'Off' }}</td>
+                                        <td>{{ $banner->title }}</td>
+                                        <td>{{ $banner->description }}</td>
                                         <td class="col-2">
-                                            <a href="{{route('product.edit', $product->id)}}" class="btn btn-sm btn-info mr-2">Edit</a>
+                                            <a href="{{route('banner.edit', $banner->id)}}" class="btn btn-sm btn-info mr-2">Edit</a>
 
-                                            <form class="d-inline" action="{{route('product.destroy', $product->id)}}" method="POST">
+                                            <form class="d-inline" action="{{route('banner.destroy', $banner->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-sm btn-danger">Delete</button>

@@ -23,4 +23,10 @@ class Product extends Model
     public function relationToSubCategory(){
         return $this->hasOne(SubCategory::class, 'id', 'sub_category_id');
     }
+
+
+    // public function relationToVendor(){
+    //     return $this->hasOne(Vendor::class, 'id', 'vendor_id');
+    // }
+
 }

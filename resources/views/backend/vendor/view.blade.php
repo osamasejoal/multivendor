@@ -17,47 +17,38 @@
     <section style="margin-top: -50px" class="ftco-section">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-10 m-auto">
                     <div class="table-wrap">
                         <table class="table table-responsive-xl text-center">
                             <thead>
                                 <tr>
-                                    <th>Image</th>
+                                    <th>Logo</th>
                                     <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Category</th>
-                                    <th>Sub Category</th>
-                                    <th>Short desc</th>
-                                    <th>Description</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
                                     <th>Status</th>
                                     <th>Action</th>         
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($products as $product)
+                                @foreach ($vendors as $vendor)
 
                                     <tr class="alert" role="alert">
                                         <td>
                                             <img style="border-radius: 5px"
-                                                src="{{ asset('backend/assets/images/product-img' . '/' . $product->image) }}"
+                                                src="{{ asset('backend/assets/images/vendor-logo' . '/' . $vendor->logo) }}"
                                                 alt="img not found" width="150px">
                                         </td>
                                                 
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ '$' . $product->price }}</td>
-                                        <td>{{ $product->quantity }}</td>
-                                        <td>{{ $product->relationToCategory->name }}</td>
-                                        <td>{{ $product->relationToSubCategory->name }}</td>
-                                        <td>{{ $product->short_desc }}</td>
-                                        <td>{{ $product->description }}</td>
-                                        {{-- <td>{{ $product->relationToCategory->name }}</td> --}}
-                                        <td>{{ $product->status == 1 ? 'On' : 'Off' }}</td>
+                                        <td>{{ $vendor->relationToUsers->name }}</td>
+                                        <td>{{ $vendor->relationToUsers->email }}</td>
+                                        <td>{{ $vendor->phone }}</td>
+                                        <td>{{ $vendor->address }}</td>
+                                        <td>{{ $vendor->status == 1 ? 'on' : 'off' }}</td>
                                         <td class="col-2">
-                                            <a href="{{route('product.edit', $product->id)}}" class="btn btn-sm btn-info mr-2">Edit</a>
-
-                                            <form class="d-inline" action="{{route('product.destroy', $product->id)}}" method="POST">
+                                            <form class="d-inline" action="{{route('vendor.destroy', $vendor->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-sm btn-danger">Delete</button>

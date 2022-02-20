@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -161,10 +161,35 @@ Route::resource('company-social', CompanySocialController::class);
 
 
 
-// Route::get('/ajax-subcat', function(){
-    //     $cat_id = Input::get('cat_id');
-    
-    //     $subcategories = SubCategory::where('category_id', '=', $cat_id)->get();
-    
-    //     return Response::json($subcategories);
-    // });
+/*
+|--------------------------------------------------------------------------
+| BannerController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('banner', BannerController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| TestimonialController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('testimonial', TestimonialController::class);
+
+
+
+
+
+/*
+|--------------------------------------------------------------------------
+| VendorController
+|--------------------------------------------------------------------------
+*/
+//
+Route::resource('vendor', VendorController::class);
+

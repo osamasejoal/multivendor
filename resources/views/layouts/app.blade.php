@@ -53,11 +53,19 @@
                 <!-- User box -->
                 <div class="user-box">
                     <div class="user-img">
-                        <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" alt="user-img"
-                            title="Mat Helme" class="rounded-circle img-fluid">
+                        <img src="{{ asset('backend/assets/images/profile-pic/' . auth()->user()->image) }}"
+                            alt="user-img" title="Mat Helme" class="rounded-circle img-fluid">
                     </div>
-                    <h5><a href="#">Maxine Kennedy</a> </h5>
-                    <p class="text-muted">Admin Head</p>
+                    <h5><a href="#">{{ auth()->user()->name }}</a> </h5>
+                    <p class="text-muted">
+                        @if (auth()->user()->roll == 1)
+                            Admin
+                        @elseif (auth()->user()->roll == 2)
+                            Vendor
+                        @else
+                            Customer
+                        @endif
+                    </p>
                 </div>
 
                 <!--- Sidemenu -->
@@ -72,6 +80,15 @@
                                 <i class="fi-air-play"></i>
                                 Dashboard
                             </a>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);"><i class="icon-target"></i> <span> Vendors </span> <span
+                                    class="menu-arrow"></span></a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="{{ route('vendor.create') }}">Add Vendors</a></li>
+                                <li><a href="{{ route('vendor.index') }}">View Vendors</a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -92,14 +109,27 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a href="javascript: void(0);"><i class=" icon-ghost"></i> <span>Product</span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{ route('product.create') }}">Add Product</a></li>
-                                <li><a href="{{ route('product.index') }}">View Product</a></li>
-                            </ul>
-                        </li>
+                        @if (auth()->user()->roll == 2)
+
+                            <li>
+                                <a href="javascript: void(0);"><i class="icon-ghost"></i> <span>Product</span> <span
+                                        class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('product.create') }}">Add Product</a></li>
+                                    <li><a href="{{ route('product.index') }}">View Product</a></li>
+                                </ul>
+                            </li>
+
+                        @elseif (auth()->user()->roll == 1)
+
+                            <li>
+                                <a href="{{ route('product.index') }}">
+                                    <i class="icon-ghost"></i>
+                                    Product
+                                </a>
+                            </li>
+
+                        @endif
 
                         <li>
                             <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
@@ -121,8 +151,18 @@
                                             class="menu-arrow"></span></a>
 
                                     <ul class="nav-third-level nav" aria-expanded="false">
-                                        <li><a href="javascript: void(0);">Add Banner</a></li>
-                                        <li><a href="javascript: void(0);">View Banner</a></li>
+                                        <li><a href="{{ route('banner.create') }}">Add Banner</a></li>
+                                        <li><a href="{{ route('banner.index') }}">View Banner</a></li>
+                                    </ul>
+
+                                </li>
+
+                                <li><a href="javascript: void(0);" aria-expanded="false">Testimonial<span
+                                            class="menu-arrow"></span></a>
+
+                                    <ul class="nav-third-level nav" aria-expanded="false">
+                                        <li><a href="{{ route('testimonial.create') }}">Add Testimonial</a></li>
+                                        <li><a href="{{ route('testimonial.index') }}">View Testimonial</a></li>
                                     </ul>
 
                                 </li>
@@ -322,8 +362,9 @@
                         <li class="dropdown notification-list">
                             <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
-                                <img src="{{ asset('backend') }}/assets/images/users/avatar-1.jpg" alt="user"
-                                    class="rounded-circle"> <span class="ml-1">Maxine K <i
+                                <img src="{{ asset('backend/assets/images/profile-pic/' . auth()->user()->image) }}"
+                                    alt="user" class="rounded-circle"> <span
+                                    class="ml-1">{{ auth()->user()->name }}<i
                                         class="mdi mdi-chevron-down"></i> </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">

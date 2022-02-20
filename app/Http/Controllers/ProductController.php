@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Vendor;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
@@ -37,9 +38,11 @@ class ProductController extends Controller
     //========================================
     public function create()
     {
-        $categories = Category::all();
-        $sub_categories = SubCategory::all();
-        return view('backend.product.add' , compact('categories' , 'sub_categories'));
+        if (auth()->user()->roll == 2) {
+            $categories = Category::all();
+            $sub_categories = SubCategory::all();
+            return view('backend.product.add' , compact('categories' , 'sub_categories'));
+        }
     }
 
 
@@ -83,7 +86,9 @@ class ProductController extends Controller
         $img_name = auth()->id() . auth()->user()->name . Str::random('5') . '.' . $request->image->getClientOriginalExtension();
         $img->save(base_path('public/backend/assets/images/product-img/' . $img_name));
 
+
         Product::insert([
+            'user_id' => auth()->id(),
             'category_id' => $request->category_id,
             'sub_category_id' => $request->sub_category_id,
             'name' => $request->name,

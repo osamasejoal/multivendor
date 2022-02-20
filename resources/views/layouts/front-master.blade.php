@@ -31,7 +31,7 @@
     <!-- modernizr css -->
     <script src="{{ asset('frontend/assets') }}/js/vendor/modernizr-2.8.3.min.js"></script>
 
-    {{-- @yield(' ') --}}
+    @yield('front-header')
 
 </head>
 

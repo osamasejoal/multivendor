@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBannersTable extends Migration
+class AddVendorIdToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateBannersTable extends Migration
      */
     public function up()
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->string('image');
-            $table->integer('status');
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->integer('user_id')->after('id');
         });
     }
 
@@ -30,6 +25,8 @@ class CreateBannersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('banners');
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn(['user_id']);
+        });
     }
 }
