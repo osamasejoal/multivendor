@@ -9,14 +9,16 @@ use Illuminate\Support\Str;
 
 class BannerController extends Controller
 {
-    
+ 
 
 
 
 
-    //=====================================
-    // INDEX method for view banner data
-    //=====================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $banners = Banner::all();
@@ -27,9 +29,11 @@ class BannerController extends Controller
 
 
 
-    //=====================================
-    // CREATE method for create banner data
-    //=====================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         return view('backend.banner.add');
@@ -39,9 +43,11 @@ class BannerController extends Controller
 
 
 
-    //=====================================
-    // STORE method for create banner data
-    //=====================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -84,9 +90,11 @@ class BannerController extends Controller
 
 
 
-    //=================================
-    // EDIT method for edit banner data
-    //=================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $banner = Banner::find($id);
@@ -97,9 +105,11 @@ class BannerController extends Controller
 
 
 
-    //===================================
-    // UPDATE method for edit banner data
-    //===================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -140,9 +150,11 @@ class BannerController extends Controller
 
 
 
-    //======================================
-    // DESTROY method for delete banner data
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         unlink(base_path('public/backend/assets/images/banner-img/' . Banner::find($id)->image));

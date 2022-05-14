@@ -1,15 +1,7 @@
-@extends('layouts.front-master')
+@extends('frontend.layouts.master')
 
-@section('front-header')
-    {{-- <style>
-        .slide-inner1 {
-            background: url({{ asset('backend/assets/images/banner-img/' . $banner->image) }});
-        }
 
-    </style> --}}
-@endsection
-
-@section('front-content')
+@section('main-content')
 
 
     <!-- slider-area start -->
@@ -39,7 +31,7 @@
                 @endforeach
 
 
-                {{-- <div class="swiper-slide">
+                <div class="swiper-slide">
                     <div class="slide-inner slide-inner7">
                         <div class="container">
                             <div class="row">
@@ -74,7 +66,7 @@
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
 
 
             </div>

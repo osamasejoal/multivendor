@@ -25,8 +25,8 @@ class Product extends Model
     }
 
 
-    // public function relationToVendor(){
-    //     return $this->hasOne(Vendor::class, 'id', 'vendor_id');
-    // }
+    public function relationToUser(){
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 
 }

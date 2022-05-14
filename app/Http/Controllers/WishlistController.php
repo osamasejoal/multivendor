@@ -13,9 +13,11 @@ class WishlistController extends Controller
 
 
 
-    //=================================
-    // INDEX method for add to wishlist
-    //=================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index($id){
 
         Wishlist::create([
@@ -28,12 +30,14 @@ class WishlistController extends Controller
     }
     
 
-    
 
 
-    //==================================
-    // DELETE method for add to wishlist
-    //==================================
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              DELETE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function delete($id){
         Wishlist::find($id)->delete();
         return back();
@@ -43,9 +47,11 @@ class WishlistController extends Controller
 
 
 
-    //===========================================
-    // view method for show to wishlist page
-    //===========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              VIEW METHOD
+    |--------------------------------------------------------------------------
+    */
     public function view()
     {
         $wishlists = Wishlist::all();

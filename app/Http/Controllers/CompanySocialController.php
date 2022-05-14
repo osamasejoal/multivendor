@@ -7,14 +7,16 @@ use Illuminate\Http\Request;
 
 class CompanySocialController extends Controller
 {
-   
+ 
 
 
 
 
-    //===============================================
-    // index method for showing company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $socials =  CompanySocial::all();
@@ -25,9 +27,11 @@ class CompanySocialController extends Controller
 
 
 
-    //===============================================
-    // create method for creating company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         return view('backend.company-social.add');
@@ -37,9 +41,11 @@ class CompanySocialController extends Controller
 
 
 
-    //===============================================
-    // store method for creating company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -76,9 +82,11 @@ class CompanySocialController extends Controller
 
 
 
-    //===============================================
-    // edit method for updating company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $social = CompanySocial::find($id);
@@ -89,9 +97,11 @@ class CompanySocialController extends Controller
 
 
 
-    //===============================================
-    // update method for updating company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -118,9 +128,11 @@ class CompanySocialController extends Controller
 
 
 
-    //===============================================
-    // destroy method for deleting company social data
-    //===============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         CompanySocial::find($id)->delete();

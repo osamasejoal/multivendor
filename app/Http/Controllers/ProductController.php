@@ -15,33 +15,22 @@ use phpDocumentor\Reflection\Types\Nullable;
 
 class ProductController extends Controller
 {
-   
 
 
 
 
-    //========================================
-    // INDEX method for view product data
-    //========================================
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
-        $products = Product::all();
-        return view('backend.product.view', compact('products'));
-    }
-
-
-
-
-
-    //========================================
-    // CREATE method for creating product data
-    //========================================
-    public function create()
-    {
-        if (auth()->user()->roll == 2) {
-            $categories = Category::all();
-            $sub_categories = SubCategory::all();
-            return view('backend.product.add' , compact('categories' , 'sub_categories'));
+        if (auth()->user()->roll != 3) {
+            $products = Product::all();
+            $vendor_product = Product::where('user_id', auth()->id())->get();
+            return view('backend.product.view', compact('products', 'vendor_product'));
         }
     }
 
@@ -49,9 +38,29 @@ class ProductController extends Controller
 
 
 
-    //========================================
-    // STORE method for creating product data
-    //========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
+    public function create()
+    {
+        if (auth()->user()->roll == 2) {
+            $categories = Category::all();
+            $sub_categories = SubCategory::all();
+            return view('backend.product.add', compact('categories', 'sub_categories'));
+        }
+    }
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -102,7 +111,7 @@ class ProductController extends Controller
             'discount' => $request->discount,
         ]);
 
-        return back()->with('success' , 'Successfully create your Product');
+        return back()->with('success', 'Successfully create your Product');
     }
 
 
@@ -119,24 +128,28 @@ class ProductController extends Controller
 
 
 
-    //========================================
-    // EDIT method for updating product data
-    //========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $categories = Category::all();
         $sub_categories = SubCategory::all();
         $products = Product::find($id);
-        return view('backend.product.edit', compact('products' , 'sub_categories', 'categories'));
+        return view('backend.product.edit', compact('products', 'sub_categories', 'categories'));
     }
 
 
 
 
 
-    //========================================
-    // UPDATE method for updating product data
-    //========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -175,7 +188,6 @@ class ProductController extends Controller
             Product::find($id)->update([
                 'image' => $img_name,
             ]);
-
         }
 
         Product::find($id)->update([
@@ -198,9 +210,11 @@ class ProductController extends Controller
 
 
 
-    //========================================
-    // DESTROY method for delete product data
-    //========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         Product::find($id)->delete();

@@ -16,9 +16,11 @@ class VendorController extends Controller
 
 
 
-    //======================================
-    // INDEX method for showing vendors data
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $vendors =Vendor::all();
@@ -29,9 +31,11 @@ class VendorController extends Controller
 
 
 
-    //========================================
-    // CREATE method for creating vendors data
-    //========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         return view('backend.vendor.add');
@@ -41,9 +45,11 @@ class VendorController extends Controller
 
 
 
-    //=======================================
-    // STORE method for creating vendors data
-    //=======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -103,9 +109,6 @@ class VendorController extends Controller
 
 
 
-    //=======================================
-    // EDIT method for updating vendors data
-    //=======================================
     public function edit($id)
     {
         
@@ -115,9 +118,6 @@ class VendorController extends Controller
 
 
 
-    //========================================
-    // UPDATE method for updating vendors data
-    //========================================
     public function update(Request $request, Vendor $vendor)
     {
         //
@@ -127,9 +127,11 @@ class VendorController extends Controller
 
 
 
-    //=========================================
-    // DESTROY method for deleting vendors data
-    //=========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         Vendor::find($id)->delete();

@@ -9,11 +9,30 @@ use Illuminate\Support\Str;
 
 class CompanyInfoController extends Controller
 {
+    
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index(){
         $company_profile = CompanyInfo::first();
-        return view('backend.profile.company-profile', compact('company_profile'));
+        return view('backend.company.view', compact('company_profile'));
     }
 
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request, $id){
 
         $request->validate([

@@ -9,10 +9,29 @@ use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
+    
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index(){
-        return view('backend.profile.user-data');
+        return view('backend.profile.view');
     }
 
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request){
 
         $request->validate([
@@ -48,4 +67,18 @@ class ProfileController extends Controller
 
         return back()->with('success', "Successfully updated your data");
     }
+    
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                         CUSTOMER PROFILE METHOD
+    |--------------------------------------------------------------------------
+    */
+    public function customer_profile(){
+        return view('frontend.customer-profile');
+    }
+
 }

@@ -1,14 +1,4 @@
-@extends('layouts.app')
-
-
-
-@section('main-style-content')
-    {{-- Style for Table --}}
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ asset('backend/table/css/style.css') }}">
-    {{-- END Style for Table --}}
-@endsection
-
+@extends('backend.layouts.master')
 
 
 @section('main-content')
@@ -39,7 +29,7 @@
                                         <td>
                                             <img style="border-radius: 5px"
                                                 src="{{ asset('backend/assets/images/vendor-logo' . '/' . $vendor->logo) }}"
-                                                alt="img not found" width="150px">
+                                                alt="img not found" width="100px">
                                         </td>
                                                 
                                         <td>{{ $vendor->relationToUsers->name }}</td>
@@ -68,16 +58,4 @@
     </section>
 
 
-@endsection
-
-
-
-
-@section('main-script-content')
-    {{-- Script for Table --}}
-    <script src="{{ asset('backend/table/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('backend/table/js/popper.js') }}"></script>
-    <script src="{{ asset('backend/table/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('backend/table/js/main.js') }}"></script>
-    {{-- END Script for Table --}}
 @endsection

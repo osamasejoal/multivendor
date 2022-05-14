@@ -19,9 +19,12 @@
     <link href="{{ asset('backend') }}/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend') }}/assets/css/style.css" rel="stylesheet" type="text/css" />
 
+    <!-- Style for Form -->
+    <link rel="stylesheet" href="{{ asset('custom/form/style.css') }}">
 
-    @yield('main-style-content')
-
+    {{-- Style for Table --}}
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{{ asset('custom/table/css/style.css') }}">
 
     <script src="{{ asset('backend') }}/assets/js/modernizr.min.js"></script>
 
@@ -82,35 +85,46 @@
                             </a>
                         </li>
 
-                        <li>
-                            <a href="javascript: void(0);"><i class="icon-target"></i> <span> Vendors </span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{ route('vendor.create') }}">Add Vendors</a></li>
-                                <li><a href="{{ route('vendor.index') }}">View Vendors</a></li>
-                            </ul>
-                        </li>
+                        @if (auth()->user()->roll == 1)
+                            <li>
+                                <a href="javascript: void(0);"><i class="icon-target"></i> <span> Vendors </span>
+                                    <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('vendor.create') }}">Add Vendors</a></li>
+                                    <li><a href="{{ route('vendor.index') }}">View Vendors</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a href="javascript: void(0);"><i class="fi-layers"></i> <span> Category </span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{ route('category.create') }}">Add Category</a></li>
-                                <li><a href="{{ route('category.index') }}">View Category</a></li>
-                            </ul>
-                        </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="mdi mdi-account-multiple"></i> <span> Customers
+                                    </span>
+                                    <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('customer.create') }}">Add Customers</a></li>
+                                    <li><a href="{{ route('customer.index') }}">View Customers</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a href="javascript: void(0);"><i class="icon-drawar"></i> <span>Sub Category </span>
-                                <span class="menu-arrow"></span></a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{ route('sub-category.create') }}">Add Sub category</a></li>
-                                <li><a href="{{ route('sub-category.index') }}">View Sub category</a></li>
-                            </ul>
-                        </li>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-layers"></i> <span> Category </span>
+                                    <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('category.create') }}">Add Category</a></li>
+                                    <li><a href="{{ route('category.index') }}">View Category</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);"><i class="icon-drawar"></i> <span>Sub Category </span>
+                                    <span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('sub-category.create') }}">Add Sub category</a></li>
+                                    <li><a href="{{ route('sub-category.index') }}">View Sub category</a></li>
+                                </ul>
+                            </li>
+                        @endif
 
                         @if (auth()->user()->roll == 2)
-
                             <li>
                                 <a href="javascript: void(0);"><i class="icon-ghost"></i> <span>Product</span> <span
                                         class="menu-arrow"></span></a>
@@ -119,57 +133,56 @@
                                     <li><a href="{{ route('product.index') }}">View Product</a></li>
                                 </ul>
                             </li>
-
                         @elseif (auth()->user()->roll == 1)
-
                             <li>
                                 <a href="{{ route('product.index') }}">
                                     <i class="icon-ghost"></i>
                                     Product
                                 </a>
                             </li>
-
                         @endif
 
-                        <li>
-                            <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
-                                    class="menu-arrow"></span></a>
-                            <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href="{{ route('edit.company') }}">Company Profile</a></li>
-                                <li><a href="{{ route('company-social.create') }}">Add Social Media</a></li>
-                                <li><a href="{{ route('company-social.index') }}">View Social Media</a></li>
-                            </ul>
-                        </li>
+                        @if (auth()->user()->roll == 1)
+                            <li>
+                                <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
+                                        class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('edit.company') }}">Company Profile</a></li>
+                                    <li><a href="{{ route('company-social.create') }}">Add Social Media</a></li>
+                                    <li><a href="{{ route('company-social.index') }}">View Social Media</a></li>
+                                </ul>
+                            </li>
 
-                        <li>
-                            <a href="javascript: void(0);"><i class="fi-share"></i> <span>Front Design</span>
-                                <span class="menu-arrow"></span></a>
+                            <li>
+                                <a href="javascript: void(0);"><i class="fi-share"></i> <span>Front Design</span>
+                                    <span class="menu-arrow"></span></a>
 
-                            <ul class="nav-second-level nav" aria-expanded="false">
+                                <ul class="nav-second-level nav" aria-expanded="false">
 
-                                <li><a href="javascript: void(0);" aria-expanded="false">Banner<span
-                                            class="menu-arrow"></span></a>
+                                    <li><a href="javascript: void(0);" aria-expanded="false">Banner<span
+                                                class="menu-arrow"></span></a>
 
-                                    <ul class="nav-third-level nav" aria-expanded="false">
-                                        <li><a href="{{ route('banner.create') }}">Add Banner</a></li>
-                                        <li><a href="{{ route('banner.index') }}">View Banner</a></li>
-                                    </ul>
+                                        <ul class="nav-third-level nav" aria-expanded="false">
+                                            <li><a href="{{ route('banner.create') }}">Add Banner</a></li>
+                                            <li><a href="{{ route('banner.index') }}">View Banner</a></li>
+                                        </ul>
 
-                                </li>
+                                    </li>
 
-                                <li><a href="javascript: void(0);" aria-expanded="false">Testimonial<span
-                                            class="menu-arrow"></span></a>
+                                    <li><a href="javascript: void(0);" aria-expanded="false">Testimonial<span
+                                                class="menu-arrow"></span></a>
 
-                                    <ul class="nav-third-level nav" aria-expanded="false">
-                                        <li><a href="{{ route('testimonial.create') }}">Add Testimonial</a></li>
-                                        <li><a href="{{ route('testimonial.index') }}">View Testimonial</a></li>
-                                    </ul>
+                                        <ul class="nav-third-level nav" aria-expanded="false">
+                                            <li><a href="{{ route('testimonial.create') }}">Add Testimonial</a></li>
+                                            <li><a href="{{ route('testimonial.index') }}">View Testimonial</a></li>
+                                        </ul>
 
-                                </li>
+                                    </li>
 
-                            </ul>
+                                </ul>
 
-                        </li>
+                            </li>
+                        @endif
 
                         <li>
                             <a href="{{ route('logout') }}"
@@ -439,63 +452,3 @@
 
 
             <!-- Start Page content -->
-
-
-            @yield('main-content')
-
-
-            <!-- content -->
-
-            <footer class="footer text-right">
-                2018 © Highdmin. - Coderthemes.com
-            </footer>
-
-        </div>
-
-
-        <!-- ============================================================== -->
-        <!-- End Right content here -->
-        <!-- ============================================================== -->
-
-
-    </div>
-    <!-- END wrapper -->
-
-
-
-    <!-- jQuery  -->
-    <script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/popper.min.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/bootstrap.min.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/metisMenu.min.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/waves.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/jquery.slimscroll.js"></script>
-
-    <!-- Flot chart -->
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.min.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.time.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.tooltip.min.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.resize.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.pie.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/curvedLines.js"></script>
-    <script src="{{ asset('backend') }}/../plugins/flot-chart/jquery.flot.axislabels.js"></script>
-
-    <!-- KNOB JS -->
-    <!--[if IE]>
-        <script type="text/javascript" src="{{ asset('backend') }}/../plugins/jquery-knob/excanvas.js"></script>
-        <![endif]-->
-    <script src="{{ asset('backend') }}/../plugins/jquery-knob/jquery.knob.js"></script>
-
-    <!-- Dashboard Init -->
-    <script src="{{ asset('backend') }}/assets/pages/jquery.dashboard.init.js"></script>
-
-    <!-- App js -->
-    <script src="{{ asset('backend') }}/assets/js/jquery.core.js"></script>
-    <script src="{{ asset('backend') }}/assets/js/jquery.app.js"></script>
-
-    @yield('main-script-content')
-
-</body>
-
-</html>

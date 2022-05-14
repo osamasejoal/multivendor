@@ -1,6 +1,6 @@
-@extends('layouts.front-master')
+@extends('frontend.layouts.master')
 
-@section('front-content')
+@section('main-content')
 
     <!-- .breadcumb-area start -->
     <div class="breadcumb-area bg-img-4 ptb-100">

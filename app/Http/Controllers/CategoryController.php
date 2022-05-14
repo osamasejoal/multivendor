@@ -11,14 +11,16 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    
+   
 
 
 
 
-    //======================================
-    // INDEX method for view categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $categories = Category::all();
@@ -29,9 +31,11 @@ class CategoryController extends Controller
 
 
 
-    //======================================
-    // CREATE method for creating categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         return view('backend.categories.add');
@@ -41,9 +45,11 @@ class CategoryController extends Controller
 
 
 
-    //======================================
-    // STORE method for creating categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -85,9 +91,11 @@ class CategoryController extends Controller
 
 
 
-    //======================================
-    // EDIT method for update categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $categories = Category::find($id);
@@ -98,9 +106,11 @@ class CategoryController extends Controller
 
 
 
-    //====================================
-    // UPDATE method for update categories
-    //====================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request,  $id)
     {
 
@@ -141,9 +151,11 @@ class CategoryController extends Controller
 
 
 
-    //======================================
-    // DESTROY method for delete categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         Category::find($id)->delete();

@@ -17,9 +17,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // INDEX method for view categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $sub_categories = SubCategory::all();
@@ -30,9 +32,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // CREATE method for creating categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         $categories = Category::all();
@@ -43,9 +47,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // STORE method for creating categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -90,9 +96,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // EDIT method for update categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $categories = Category::all();
@@ -104,9 +112,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // UPDATE method for update categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request,  $id)
     {
 
@@ -149,9 +159,11 @@ class SubCategoryController extends Controller
 
 
 
-    //======================================
-    // DESTROY method for delete categories
-    //======================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         SubCategory::find($id)->delete();

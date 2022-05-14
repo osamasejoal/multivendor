@@ -14,76 +14,16 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    
-
-
-
-
-    public function index()
-    {
-        
-    }
   
 
 
 
-    
-    public function create()
-    {
-        //
-    }
-  
 
-
-
-    
-    public function store(Request $request)
-    {
-        //
-    }
-  
-
-
-
-    
-    public function show($id)
-    {
-        //
-    }
-  
-
-
-
-    
-    public function edit($id)
-    {
-        //
-    }
-  
-
-
-
-    
-    public function update(Request $request, $id)
-    {
-        //
-    }
-  
-
-
-
-    
-    public function destroy($id)
-    {
-        //
-    }
-
-
-
-
-    // ===================================
-    // FRONTPAGE method for view frontpage
-    // ===================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              FRONTPAGE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function frontpage(){
         $categories = Category::all();
         $sub_categories = SubCategory::all();
@@ -91,15 +31,18 @@ class FrontendController extends Controller
         $banners = Banner::all();
         $testimonials = Testimonial::all();
 
-        return view('frontend.front-page', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
+        return view('frontend.index', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
     }
     
 
 
 
-    // ====================================================
-    // categoryProduct method for view categorywise product
-    // ====================================================
+
+    /*
+    |--------------------------------------------------------------------------
+    |                          CATEGORY PRODUCT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function categoryProduct($id){
 
         $category = Category::find($id);
@@ -111,9 +54,12 @@ class FrontendController extends Controller
 
 
 
-    // ===============================================
-    // productPage method for view single product page
-    // ===============================================
+
+    /*
+    |--------------------------------------------------------------------------
+    |                            PRODUCT PAGE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function productPage($id){
         $product = Product::find($id);
         return view('frontend.single-product', compact('product'));
@@ -123,9 +69,12 @@ class FrontendController extends Controller
 
 
 
-    // ===============================================
-    // dealOfTheDay method for view single product page
-    // ===============================================
+
+    /*
+    |--------------------------------------------------------------------------
+    |                         DEAL OF THE DAY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function dealOfTheDay(){
         
         $deals = Product::where('deal', 1)->get();

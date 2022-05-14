@@ -10,14 +10,16 @@ use Illuminate\Support\Str;
 
 class TestimonialController extends Controller
 {
-    
+   
 
 
 
 
-    //==========================================
-    // INDEX method for showing testimonial data
-    //==========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
         $testimonials = Testimonial::all();
@@ -28,9 +30,11 @@ class TestimonialController extends Controller
 
 
 
-    //===========================================
-    // CREAT method for creating testimonial data
-    //===========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              CREATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function create()
     {
         return view('backend.testimonial.add');
@@ -40,9 +44,11 @@ class TestimonialController extends Controller
 
 
 
-    //===========================================
-    // STORE method for creating testimonial data
-    //===========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              STORE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function store(Request $request)
     {
         $request->validate([
@@ -88,9 +94,11 @@ class TestimonialController extends Controller
 
 
 
-    //===========================================
-    // EDIT method for updating testimonial data
-    //===========================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              EDIT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function edit($id)
     {
         $testimonial = Testimonial::find($id);
@@ -101,9 +109,11 @@ class TestimonialController extends Controller
 
 
 
-    //============================================
-    // UPDATE method for updating testimonial data
-    //============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              UPDATE METHOD
+    |--------------------------------------------------------------------------
+    */
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -146,9 +156,11 @@ class TestimonialController extends Controller
 
 
 
-    //=============================================
-    // DESTROY method for deleting testimonial data
-    //=============================================
+    /*
+    |--------------------------------------------------------------------------
+    |                              DESTROY METHOD
+    |--------------------------------------------------------------------------
+    */
     public function destroy($id)
     {
         unlink(base_path('public/backend/assets/images/testimonial-img/' . Testimonial::find($id)->image));

@@ -3,27 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Product;
+use App\Models\Banner;
+use App\Models\Testimonial;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              __CONSTRUCT METHOD
+    |--------------------------------------------------------------------------
+    */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              INDEX METHOD
+    |--------------------------------------------------------------------------
+    */
     public function index()
     {
-        // return view('home');
-        return view('admin-panel');
+        if (auth()->user()->roll == 3) {
+
+            $categories = Category::all();
+            $sub_categories = SubCategory::all();
+            $products = Product::all();
+            $banners = Banner::all();
+            $testimonials = Testimonial::all();
+
+            return view('frontend.front-page', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
+        } else {
+            return view('backend.index');
+        }
+        
+        
     }
 }
