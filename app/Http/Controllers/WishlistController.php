@@ -55,6 +55,6 @@ class WishlistController extends Controller
     public function view()
     {
         $wishlists = Wishlist::all();
-        return view('frontend.wishlists', compact('wishlists'));
+        return view('frontend.wishlist.view', compact('wishlists'));
     }
 }

@@ -144,6 +144,17 @@
 
                         @if (auth()->user()->roll == 1)
                             <li>
+                                <a href="javascript: void(0);"><i class="icon-ghost"></i> <span>Coupon</span> <span
+                                        class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="{{ route('coupon.create') }}">Add Coupon</a></li>
+                                    <li><a href="{{ route('coupon.index') }}">View Coupon</a></li>
+                                </ul>
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->roll == 1)
+                            <li>
                                 <a href="javascript: void(0);"><i class="icon-energy"></i> <span>Company</span> <span
                                         class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">

@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('main-content')
-    <section style="margin-top: 10px" id="main-content" class="get-in-touch text-center">
+    <section id="main-content" class="get-in-touch text-center">
         <div class="row">
 
             {{-- <section class="get-in-touch"> --}}
@@ -18,7 +18,7 @@
                 @csrf
                 <div class="form-field col-lg-6">
                     <label class="label" for="name">Name</label>
-                    <input value="{{ auth()->user()->name }}" name="name" id="name" class="input-text js-input"
+                    <input style="background: transparent" value="{{ auth()->user()->name }}" name="name" id="name" class="input-text js-input"
                         type="text">
                 </div>
 
@@ -26,9 +26,9 @@
                     <span style="margin-top: -30px" class="text-danger d-flex col-lg-12 mb-4">{{ $message }}</span>
                 @enderror
 
-                <div class="form-field col-lg-12 ">
+                <div class="form-field col-lg-6 ">
                     <label class="label" for="email">Email</label>
-                    <input value="{{ auth()->user()->email }}" name="email" id="email" class="input-text js-input"
+                    <input style="background: transparent" value="{{ auth()->user()->email }}" name="email" id="email" class="input-text js-input"
                         type="text">
                 </div>
 
@@ -43,9 +43,9 @@
                 </div>
 
                 <div class="form-field col-lg-6">
-                    <label class="label" for="image">Choose your Profile
+                    <label class="label" for="image">Choose Profile
                         picture</label>
-                    <input name="image" id="image" class="input-text js-input" type="file">
+                    <input style="background: transparent" name="image" id="image" class="input-text js-input" type="file">
                 </div>
 
                 @error('image')

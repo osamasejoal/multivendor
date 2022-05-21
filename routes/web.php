@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -81,9 +81,13 @@ Route::resource('product', ProductController::class);
 */
 Route::get('/cart/add/{id}', [CartController::class, 'index'])->name('add.cart');
 
+Route::post('/product/page/cart/{id}', [CartController::class, 'productPageCart'])->name('product.page.cart');
+
 Route::get('/cart/delete/{id}', [CartController::class, 'delete'])->name('delete.cart');
 
 Route::get('/carts/view', [CartController::class, 'view'])->name('view.carts');
+
+Route::post('/carts/update', [CartController::class, 'cartUpdate'])->name('cart.update');
 
 
 
@@ -153,4 +157,13 @@ Route::resource('vendor', VendorController::class);
 |--------------------------------------------------------------------------
 */
 Route::resource('customer', CustomerController::class);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CouponController
+|--------------------------------------------------------------------------
+*/
+Route::resource('coupon', CouponController::class);
 

@@ -40,7 +40,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets') }}/css/responsive.css">
 
     <!-- Style for Form -->
-    <link rel="stylesheet" href="{{ asset('backend/form/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('custom/form/style.css') }}">
 
     <!-- modernizr css -->
     <script src="{{ asset('frontend/assets') }}/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -96,14 +96,14 @@
                                     <ul class="dropdown_style">
 
                                         @if (auth()->user()->roll == 3)
-                                            <li><a href="{{route('customer.profile.update')}}">Profile</a></li>
+                                            <li><a href="{{ route('customer.profile.update') }}">Profile</a></li>
                                         @else
                                             <li><a href="{{ route('home') }}">Dashboard</a></li>
                                         @endif
 
                                         <li><a href="cart.html">Cart</a></li>
                                         <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="wishlist.html">wishlist</a></li>
+                                        <li><a href="{{ route('view.wishlist') }}">wishlist</a></li>
                                         <li><a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">logout</a>
                                             <form id="frm-logout" action="{{ route('logout') }}" method="POST"
@@ -186,14 +186,15 @@
                                 <li>
                                     <a href="{{ route('view.wishlist') }}"><i class="flaticon-like"></i>
 
-                                        @if (count(wishlists()) != 0)
+                                        @if (count(wishlists()) > 0)
                                             <span>{{ count(wishlists()) }}</span>
                                         @endif
 
                                     </a>
-                                    <ul class="cart-wrap dropdown_style">
 
-                                        @forelse (wishlists() as $wishlist)
+
+                                    <ul class="{{ count(wishlists()) > 0 ? 'cart-wrap dropdown_style' : 'd-none' }}">
+                                        @foreach (wishlists() as $wishlist)
                                             <li class="cart-items">
                                                 <div class="cart-img">
                                                     <img width="50px"
@@ -201,31 +202,20 @@
                                                         alt="">
                                                 </div>
                                                 <div class="cart-content">
-                                                    <a href="cart.html">{{ $wishlist->relationToProduct->name }}</a>
+                                                    <a
+                                                        href="{{ route('view.wishlist') }}">{{ $wishlist->relationToProduct->name }}</a>
                                                     <a href="{{ route('delete.wishlist', $wishlist->id) }}">
                                                         <i class="fa fa-times"></i>
                                                     </a>
                                                 </div>
                                             </li>
-
-                                        @empty
-
-                                            <li class="cart-items">
-                                                <div class="cart-content text-danger text-center" style="font-size: 18px">
-                                                    EMPTY!</div>
-                                            </li>
-                                        @endforelse
-
+                                        @endforeach
                                     </ul>
+
                                 </li>
                             @else
                                 <li>
-                                    <a href="#"><i class="flaticon-like"></i></a>
-                                    <ul class="cart-wrap dropdown_style">
-                                        <div class="alert alert-danger">
-                                            You are not logged in!
-                                        </div>
-                                    </ul>
+                                    <a href="{{ route('login') }}"><i class="flaticon-like"></i></a>
                                 </li>
 
                             @endauth
@@ -237,14 +227,15 @@
                                 <li>
                                     <a href="{{ route('view.carts') }}"><i class="flaticon-shop"></i>
 
-                                        @if (count(carts()) != 0)
+                                        @if (count(carts()) > 0)
                                             <span>{{ carts()->count() }}</span>
                                         @endif
 
                                     </a>
-                                    <ul class="cart-wrap dropdown_style">
 
-                                        @forelse (carts() as $cart)
+
+                                    <ul class="{{ count(carts()) > 0 ? 'cart-wrap dropdown_style' : 'd-none' }}">
+                                        @foreach (carts() as $cart)
                                             <li class="cart-items">
 
                                                 <div class="cart-img">
@@ -263,31 +254,18 @@
                                                 </div>
 
                                             </li>
-
-                                        @empty
-
-                                            <li class="cart-items">
-                                                <div class="cart-content text-danger text-center" style="font-size: 18px">
-                                                    EMPTY!</div>
-                                            </li>
-                                        @endforelse
-
-                                        @if (count(carts()) != 0)
+                                        @endforeach
+                                        @if (count(carts()) > 0)
                                             <li>
-                                                <button>Check Out</button>
+                                                <a href="#" class="checkout">Check out</a>
                                             </li>
                                         @endif
-
                                     </ul>
+
                                 </li>
                             @else
                                 <li>
-                                    <a href="javascript:void(0);"><i class="flaticon-shop"></i></a>
-                                    <ul class="cart-wrap dropdown_style">
-                                        <div class="alert alert-danger">
-                                            You are not Logged in!
-                                        </div>
-                                    </ul>
+                                    <a href="{{ route('login') }}"><i class="flaticon-shop"></i></a>
                                 </li>
 
                             @endauth

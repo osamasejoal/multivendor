@@ -45,7 +45,7 @@ class HomeController extends Controller
             $banners = Banner::all();
             $testimonials = Testimonial::all();
 
-            return view('frontend.front-page', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
+            return view('frontend.index', compact('categories', 'sub_categories', 'products', 'banners', 'testimonials'));
         } else {
             return view('backend.index');
         }
