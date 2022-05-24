@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\Coupon;
+use Illuminate\Support\Carbon;
 
 class CartController extends Controller
 {
@@ -131,10 +133,55 @@ class CartController extends Controller
     |                              VIEW METHOD
     |--------------------------------------------------------------------------
     */
-    public function view()
+    public function view(Request $request)
     {
+
+        if ($request->has('coupon_code')) {
+
+            $code_name = $request->coupon_code;
+
+            if (Coupon::where('code', $code_name)->exists()) {
+                $coupon_info = Coupon::where('code', $code_name)->first();
+
+                if ($coupon_info->limit >=1) {
+
+                    if ($coupon_info->validity >= Carbon::today()->format('Y-m-d')) {
+                        $discount = (session('s_cart_total') * $coupon_info->discount)/100;
+                        $coupon = $coupon_info->code;
+                    }
+                    else {
+                        return redirect('carts/view')->with([
+                            'code_name' => $code_name,
+                            'coupon_error' => "Coupon validity date is over!"
+                        ]);
+                    }
+                    
+                }
+                else {
+                    return redirect('carts/view')->with([
+                        'code_name' => $code_name,
+                        'coupon_error' => "Coupon limit is over!"
+                    ]);
+                }
+                
+            }
+            else {
+                return redirect('carts/view')->with([
+                    'code_name' => $code_name,
+                    'coupon_error' => "Invalid coupon!"
+                ]);
+            }
+        }
+        else {
+            $discount = 0;
+            $coupon = "";
+        }
+
+
+
         $carts = Cart::all();
-        return view('frontend.cart.view', compact('carts'));
+
+        return view('frontend.cart.view', compact('carts', 'coupon', 'discount'));
     }
 
 
@@ -143,7 +190,7 @@ class CartController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    |                              VIEW METHOD
+    |                              CART UPDATE METHOD
     |--------------------------------------------------------------------------
     */
     public function cartUpdate(Request $request)

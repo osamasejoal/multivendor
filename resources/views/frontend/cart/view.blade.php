@@ -25,20 +25,20 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                            <table class="table-responsive cart-wrap">
-                                <thead>
-                                    <tr>
-                                        <th class="images">Image</th>
-                                        <th class="product">Product</th>
-                                        <th class="ptice">Price</th>
-                                        <th class="quantity">Quantity</th>
-                                        <th class="total">Total</th>
-                                        <th class="remove">Remove</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <form action="{{ route('cart.update') }}" method="post">
-                                        @csrf
+                        <table class="table-responsive cart-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="images">Image</th>
+                                    <th class="product">Product</th>
+                                    <th class="ptice">Price</th>
+                                    <th class="quantity">Quantity</th>
+                                    <th class="total">Total</th>
+                                    <th class="remove">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <form action="{{ route('cart.update') }}" method="post">
+                                    @csrf
 
                                     @php
                                         $cart_total = 0;
@@ -72,7 +72,8 @@
                                             </td>
                                             <td class="price">$ {{ $cart->relationToProduct->price }}</td>
                                             <td class="quantity cart-plus-minus">
-                                                <input type="text" value="{{ $cart->amount }}" name="amount[ {{ $cart->id }} ]" />
+                                                <input type="text" value="{{ $cart->amount }}"
+                                                    name="amount[ {{ $cart->id }} ]" />
                                             </td>
                                             <td class="total">$
                                                 {{ $cart->relationToProduct->price * $cart->amount }}</td>
@@ -86,50 +87,99 @@
                                         </tr>
                                     @endforeach
 
-                                </tbody>
-                            </table>
-                            <div class="row mt-60">
-                                <div class="col-xl-4 col-lg-5 col-md-6 ">
-                                    <div class="cartcupon-wrap">
-                                        <ul class="d-flex">
-                                            <li>
-                                                <button type="submit">Update Cart</button>
-                                            </li>
+                            </tbody>
+                        </table>
+                        <div class="row mt-60">
+                            <div class="col-xl-4 col-lg-5 col-md-6 ">
+                                <div class="cartcupon-wrap">
+                                    <ul class="d-flex">
+                                        <li>
+                                            <button type="submit">Update Cart</button>
+                                        </li>
 
 
-                                            </form>
+                                        </form>
 
 
-                                            <li><a href="{{ route('frontpage') }}">Continue Shopping</a></li>
-                                        </ul>
-                                        <h3>Coupon</h3>
-                                        <p>Enter Your Coupon Code if You Have One</p>
-                                        <div class="cupon-wrap">
-                                            <input type="text" placeholder="Coupon Code">
-                                            <button>Apply Coupon</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 offset-xl-5 col-lg-4 offset-lg-3 col-md-6">
-                                    <div class="cart-total text-right">
+                                        <li><a href="{{ route('frontpage') }}">Continue Shopping</a></li>
+                                    </ul>
+                                    <h3>Coupon</h3>
+                                    <p>Enter Your Coupon Code if You Have One</p>
+                                    <div class="cupon-wrap">
 
-                                        <h3>Cart Totals</h3>
-                                        <ul>
-                                            <li><span class="pull-left">Subtotal </span>$ {{ $cart_total }}</li>
-                                            <li><span class="pull-left"> Total </span> $ {{ $cart_total }}</li>
-                                        </ul>
+                                        <form action="{{ route('view.carts') }}" method="get">
 
-                                        @if ($stock_status)
-                                            <div class="alert alert-danger mt-4">
-                                                Remove stock out products.
-                                            </div>
-                                        @else
-                                            <a href="checkout.html">Proceed to Checkout</a>
+                                            <input type="text" value="{{ session('code_name') ? session('code_name') : $coupon }}" placeholder="Coupon Code"
+                                                name="coupon_code">
+                                            <button type="submit">Apply Coupon</button>
+
+                                        </form>
+
+                                        @if (session('coupon_error'))
+                                            <span class="text-danger">{{session('coupon_error')}}</span>
                                         @endif
-
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xl-4 offset-xl-4 col-lg-4 offset-lg-3 col-md-6">
+                                <div class="cart-total text-right">
+
+                                    <h3>Cart Totals</h3>
+                                    <ul>
+                                        @php
+                                            Session::put('s_cart_total', $cart_total);
+                                        @endphp
+                                        <li>
+                                            <span class="pull-left">Cart total </span>$ {{ $cart_total }}
+                                        </li>
+
+                                        <li>
+                                            <span class="pull-left">Discount ({{ $coupon ? $coupon : 'N/A' }})
+                                            </span>$ {{ $discount }}
+                                        </li>
+
+                                        <li>
+                                            <span class="pull-left">Subtotal </span>
+                                            $
+                                            <span id="subtotal">{{ $cart_total - $discount }}</span>
+                                        </li>
+
+                                        <div class="mt-5">
+                                            <p class="d-flex mb-2" style="font-size:18px;font-weight:500">Delivery</p>
+                                            <ul>
+                                                <li class="mb-1">
+                                                    <input id="radio-one" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
+                                                    <span class="pull-left" style="font-size: 15px;">Urgent</span>
+                                                    $50
+                                                </li>
+                                                <li class="mb-1" style="font-weight:500;font-size:15px">
+                                                    <input checked id="radio-two" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
+                                                    <span class="pull-left" style="font-size: 15px;">Standard</span>
+                                                    $30
+                                                </li>
+                                            </ul>
+                                        </div>
+
+                                        <hr class="my-4" style="background-color: #a7a7a7">
+
+                                        <li class="text-danger">
+                                            <span class="pull-left"> Grand Total </span> 
+                                            $
+                                            <span id="grandtotal">{{ ($cart_total - $discount) + 30 }}</span>
+                                        </li>
+                                    </ul>
+
+                                    @if ($stock_status)
+                                        <div class="alert alert-danger mt-4">
+                                            Remove stock out products.
+                                        </div>
+                                    @else
+                                        <a href="{{ route('checkout') }}">Proceed to Checkout</a>
+                                    @endif
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -147,5 +197,19 @@
     @endif
 
 
+@endsection
 
+@section('script-content')
+    <script>
+        $('document').ready(function(){
+
+            $('#radio-one').click(function(){
+                $('#grandtotal').html(parseInt($('#subtotal').html())+50);
+            });
+
+            $('#radio-two').click(function(){
+                $('#grandtotal').html(parseInt($('#subtotal').html())+30);
+            });
+        });
+    </script>
 @endsection

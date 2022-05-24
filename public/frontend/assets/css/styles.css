@@ -2742,7 +2742,7 @@ shop single style here
     position: absolute;
     right: 0;
     bottom: 5px;
-    width: 200px;
+    width: 250px;
     height: 1px;
     background: #d7d7d7;
     content: "";
@@ -2750,7 +2750,7 @@ shop single style here
 
 .cart-total h3:after {
     bottom: 0;
-    width: 230px;
+    width: 280px;
     background: #a7a7a7;
 }
 
@@ -2765,7 +2765,7 @@ shop single style here
 }
 
 .cart-total ul li:last-child span {
-    font-size: 30px;
+    font-size: 28px;
 }
 
 .cart-total ul li:last-child {
@@ -2948,14 +2948,14 @@ label.fontsize {
     margin-bottom: 40px;
 }
 
-.total-cost li {
+.total-cost li.order-main-li {
     margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 1px solid #d7d7d7;
     color: #333;
 }
 
-.total-cost li:last-child {
+.total-cost li.g-total-cost {
     font-size: 18px;
     font-weight: 700;
 }

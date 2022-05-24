@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController, CheckoutController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -166,4 +166,13 @@ Route::resource('customer', CustomerController::class);
 |--------------------------------------------------------------------------
 */
 Route::resource('coupon', CouponController::class);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CheckoutController
+|--------------------------------------------------------------------------
+*/
+Route::get('/check/out', [CheckoutController::class, 'view'])->name('checkout');
 
