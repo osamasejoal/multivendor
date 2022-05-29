@@ -128,6 +128,9 @@
                                     <ul>
                                         @php
                                             Session::put('s_cart_total', $cart_total);
+                                            Session::put('s_discount', $discount);
+                                            Session::put('s_subtotal', $cart_total - $discount);
+                                            // Session::put('s_delivery', 30);
                                         @endphp
                                         <li>
                                             <span class="pull-left">Cart total </span>$ {{ $cart_total }}
@@ -156,6 +159,11 @@
                                                     <input checked id="radio-two" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
                                                     <span class="pull-left" style="font-size: 15px;">Standard</span>
                                                     $30
+                                                </li>
+                                                <li class="mb-1" style="font-weight:500;font-size:15px">
+                                                    <input id="radio-three" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
+                                                    <span class="pull-left" style="font-size: 15px;">Free</span>
+                                                    $0
                                                 </li>
                                             </ul>
                                         </div>
@@ -205,10 +213,23 @@
 
             $('#radio-one').click(function(){
                 $('#grandtotal').html(parseInt($('#subtotal').html())+50);
+                @php
+                    Session::put('s_delivery', 50);
+                @endphp
             });
 
             $('#radio-two').click(function(){
                 $('#grandtotal').html(parseInt($('#subtotal').html())+30);
+                @php
+                    Session::put('s_delivery', 30);
+                @endphp
+            });
+
+            $('#radio-three').click(function(){
+                $('#grandtotal').html(parseInt($('#subtotal').html())+0);
+                @php
+                    Session::put('s_delivery', 10);
+                @endphp
             });
         });
     </script>

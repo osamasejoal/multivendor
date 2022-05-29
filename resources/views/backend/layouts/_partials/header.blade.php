@@ -87,6 +87,40 @@
 
                         @if (auth()->user()->roll == 1)
                             <li>
+                                <a href="Area"><i class="fi-share"></i> <span>Area</span>
+                                    <span class="menu-arrow"></span></a>
+
+                                <ul class="nav-second-level nav" aria-expanded="false">
+
+                                    <li>
+                                        <a href="Area/Country" aria-expanded="false">Country<span
+                                                class="menu-arrow"></span></a>
+
+                                        <ul class="nav-third-level nav" aria-expanded="false">
+                                            <li><a href="{{ route('country.add') }}">Add Country</a></li>
+                                            <li><a href="{{ route('country.view') }}">View Country</a></li>
+                                        </ul>
+
+                                    </li>
+
+                                    <li>
+                                        <a href="Area/City" aria-expanded="false">City<span
+                                                class="menu-arrow"></span></a>
+
+                                        <ul class="nav-third-level nav" aria-expanded="false">
+                                            <li><a href="{{ route('city.add') }}">Add City</a></li>
+                                            <li><a href="{{ route('city.view') }}">View City</a></li>
+                                        </ul>
+
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                        @endif
+
+                        @if (auth()->user()->roll == 1)
+                            <li>
                                 <a href="javascript: void(0);"><i class="icon-target"></i> <span> Vendors </span>
                                     <span class="menu-arrow"></span></a>
                                 <ul class="nav-second-level" aria-expanded="false">

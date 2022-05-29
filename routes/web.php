@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController, CheckoutController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController, CheckoutController, AreaController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -175,4 +175,22 @@ Route::resource('coupon', CouponController::class);
 |--------------------------------------------------------------------------
 */
 Route::get('/check/out', [CheckoutController::class, 'view'])->name('checkout');
+Route::post('/check/out', [CheckoutController::class, 'checkoutPost'])->name('checkout.post');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| AreaController
+|--------------------------------------------------------------------------
+*/
+Route::get('/add/country', [AreaController::class, 'addCountry'])->name('country.add');
+Route::post('/store/country', [AreaController::class, 'storeCountry'])->name('country.store');
+Route::get('/view/countries', [AreaController::class, 'viewCountries'])->name('country.view');
+Route::post('/destroy/countries/{id}', [AreaController::class, 'destroyCountries'])->name('country.destroy');
+
+Route::get('/add/city', [AreaController::class, 'addCity'])->name('city.add');
+Route::post('/store/city', [AreaController::class, 'storeCity'])->name('city.store');
+Route::get('/view/cities', [AreaController::class, 'viewCities'])->name('city.view');
+Route::post('/destroy/cities/{id}', [AreaController::class, 'destroyCities'])->name('city.destroy');
 
