@@ -29,50 +29,85 @@
                     <div class="col-lg-8">
                         <div class="checkout-form form-style">
                             <h3>Billing Details</h3>
-                            <div class="row">
+                            <div class="row billing-details">
 
                                 {{-- Name --}}
-                                <div class="col-sm-6 col-12">
+                                <div class="col-sm-6 col-12 field-div">
                                     <p>Name *</p>
                                     <input type="text" name="name" value="{{ auth()->user()->name }}">
+
+                                    @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Email --}}
-                                <div class="col-sm-6 col-12">
+                                <div class="col-sm-6 col-12 field-div">
                                     <p>Email Address *</p>
                                     <input type="email" name="email" value="{{ auth()->user()->email }}">
+
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Phone number --}}
-                                <div class="col-sm-12 col-12">
+                                <div class="col-sm-12 col-12 field-div">
                                     <p>Phone No. *</p>
-                                    <input type="number" name="phone">
+                                    <input type="text" name="phone">
+
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Country --}}
-                                <div class="col-sm-6 col-12">
+                                <div class="col-sm-6 col-12 field-div">
                                     <p>Country *</p>
-                                    <input type="text" name="country">
+                                    <select name="country" id="country-dropdown" style="background-color:aliceblue">
+                                        <option value="">Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('country')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Town/City --}}
-                                <div class="col-sm-6 col-12">
+                                <div class="col-sm-6 col-12 field-div">
                                     <p>Town/City *</p>
-                                    <input type="text" name="town-city">
+                                    <select name="city" id="city-dropdown" disabled style="background-color:aliceblue">
+                                        <option value="">Select a City</option>
+                                    </select>
+
+                                    @error('city')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Address --}}
-                                <div class="col-12">
+                                <div class="col-12 field-div">
                                     <p>Your Address *</p>
                                     <input type="text" name="address">
+
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
 
                                 {{-- Postal code --}}
-                                <div class="col-sm-6 col-12">
-                                    <p>Postcode/ZIP</p>
-                                    <input type="number" name="postal">
+                                <div class="col-sm-6 col-12 field-div">
+                                    <p>Postcode/ZIP *</p>
+                                    <input type="number" name="postcode">
+
+                                    @error('postal')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
                                 </div>
-                                
+
 
 
 
@@ -149,9 +184,9 @@
 
 
 
-                                <div class="col-12">
+                                <div class="col-12 field-div">
                                     <p>Order Notes </p>
-                                    <textarea name="massage" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                    <textarea name="order_notes" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
                                 </div>
                             </div>
 
@@ -187,7 +222,9 @@
                                         <li>Cart Total <span
                                                 class="pull-right">${{ Session::get('s_cart_total') }}</span>
                                         </li>
-                                        <li>Discount <span class="pull-right">${{ Session::get('s_discount') }}</span>
+                                        <li>Discount
+                                            ({{ Session::get('s_coupon_code') ? Session::get('s_coupon_code') : 'N/A' }})
+                                            <span class="pull-right">${{ Session::get('s_discount') }}</span>
                                         </li>
                                         <li class="font-weight-bold">Subtotal <span
                                                 class="pull-right">${{ Session::get('s_subtotal') }}</span> </li>
@@ -195,28 +232,27 @@
                                 </li>
 
                                 {{-- Shipping --}}
-                                <li class="order-main-li">Delivery <span
-                                        class="pull-right">${{ Session::get('s_delivery') }}</span></li>
-                                <li class="order-main-li g-total-cost">Grand Total<span
-                                        class="pull-right">${{ Session::get('s_subtotal') }}</span></li>
+                                <li class="order-main-li">Shipping
+                                    <span class="pull-right">${{ Session::get('s_shipping') }}
+                                    </span>
+                                </li>
+                                <li class="order-main-li g-total-cost">Grand Total
+                                    <span class="pull-right">${{ Session::get('s_subtotal') }}
+                                    </span>
+                                </li>
                             </ul>
                             <ul class="payment-method">
                                 <li>
-                                    <input id="bank" type="checkbox">
-                                    <label for="bank">Direct Bank Transfer</label>
+                                    <input id="op" type="radio" name="payment_option" value="2">
+                                    <label class="ml-2" for="op">Online Payment</label>
                                 </li>
                                 <li>
-                                    <input id="paypal" type="checkbox">
-                                    <label for="paypal">Paypal</label>
+                                    <input id="cod" type="radio" name="payment_option" value="1">
+                                    <label class="ml-2 mb-0" for="cod">Cash on Delivery</label>
                                 </li>
-                                <li>
-                                    <input id="card" type="checkbox">
-                                    <label for="card">Credit Card</label>
-                                </li>
-                                <li>
-                                    <input id="delivery" type="checkbox">
-                                    <label for="delivery">Cash on Delivery</label>
-                                </li>
+                                @error('payment_option')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </ul>
                             <button type="submit">Place Order</button>
                         </div>
@@ -228,4 +264,32 @@
         </div>
     </div>
     <!-- checkout-area end -->
+@endsection
+
+@section('script-content')
+    <script>
+        $('document').ready(function() {
+            $('#country-dropdown').change(function() {
+                $('#city-dropdown').attr('disabled', false);
+                var country_id = $(this).val();
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/city/list',
+                    data: {
+                        country_id: country_id
+                    },
+                    success: function(data) {
+                        $('#city-dropdown').html(data);
+                    }
+                })
+            })
+        });
+    </script>
 @endsection

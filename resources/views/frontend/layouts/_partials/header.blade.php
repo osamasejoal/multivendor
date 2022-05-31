@@ -7,6 +7,10 @@
     <title>Tohoney - Home Page</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{-- csrf token for ajax --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="shortcut icon" type="image/png" href="{{ asset('frontend/assets') }}/images/favicon.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -101,9 +105,8 @@
                                             <li><a href="{{ route('home') }}">Dashboard</a></li>
                                         @endif
 
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
                                         <li><a href="{{ route('view.wishlist') }}">wishlist</a></li>
+                                        <li><a href="cart.html">Cart</a></li>
                                         <li><a href="{{ route('logout') }}"
                                                 onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">logout</a>
                                             <form id="frm-logout" action="{{ route('logout') }}" method="POST"

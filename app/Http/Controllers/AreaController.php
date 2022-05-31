@@ -8,6 +8,20 @@ use Illuminate\Http\Request;
 
 class AreaController extends Controller
 {
+
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                              __CONSTRUCT METHOD
+    |--------------------------------------------------------------------------
+    */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     
 
 
@@ -19,7 +33,11 @@ class AreaController extends Controller
 |--------------------------------------------------------------------------
 */
     public function addCountry(){
-        return view('backend.area.country.add');
+        if (auth()->user()->roll == 1) {
+            return view('backend.area.country.add');
+        } else {
+            abort('404');
+        }
     }
     
 
@@ -141,8 +159,8 @@ class AreaController extends Controller
 |--------------------------------------------------------------------------
 */
     public function destroyCities($id){
-        Country::find($id)->delete();
-        return back()->with('success', 'Successfully deleted your country');
+        City::find($id)->delete();
+        return back()->with('success', 'Successfully deleted your City');
     }
 
 

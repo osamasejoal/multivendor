@@ -2893,6 +2893,16 @@ checkout style here
     padding-left: 20px;
 }
 
+.billing-details input,
+.billing-details select,
+.billing-details textarea {
+    margin-bottom: 0;
+}
+
+.billing-details .field-div {
+    margin-bottom: 25px;
+}
+
 .form-style textarea {
     height: 150px;
     padding-top: 10px;

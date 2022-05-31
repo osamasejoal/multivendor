@@ -35,11 +35,13 @@ class CartController extends Controller
             return back();
         }
         else{
-            $quantity = Product::find($id)->quantity;
+            $quantity   = Product::find($id)->quantity;
+            $vendor_id  = Product::find($id)->user_id;
             if ($quantity >= 1) {
                 Cart::create([
-                    'product_id' => $id,
                     'user_id' => auth()->id(),
+                    'vendor_id' => $vendor_id,
+                    'product_id' => $id,
                     'amount' => 1,
                     'status' => 1,
                 ]);
@@ -146,8 +148,10 @@ class CartController extends Controller
                 if ($coupon_info->limit >=1) {
 
                     if ($coupon_info->validity >= Carbon::today()->format('Y-m-d')) {
+
                         $discount = (session('s_cart_total') * $coupon_info->discount)/100;
                         $coupon = $coupon_info->code;
+                        
                     }
                     else {
                         return redirect('carts/view')->with([
@@ -179,7 +183,7 @@ class CartController extends Controller
 
 
 
-        $carts = Cart::all();
+        $carts = Cart::where('user_id', auth()->id())->get();
 
         return view('frontend.cart.view', compact('carts', 'coupon', 'discount'));
     }

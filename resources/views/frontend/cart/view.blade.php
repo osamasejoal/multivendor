@@ -109,14 +109,15 @@
 
                                         <form action="{{ route('view.carts') }}" method="get">
 
-                                            <input type="text" value="{{ session('code_name') ? session('code_name') : $coupon }}" placeholder="Coupon Code"
-                                                name="coupon_code">
+                                            <input type="text"
+                                                value="{{ session('code_name') ? session('code_name') : $coupon }}"
+                                                placeholder="Coupon Code" name="coupon_code">
                                             <button type="submit">Apply Coupon</button>
 
                                         </form>
 
                                         @if (session('coupon_error'))
-                                            <span class="text-danger">{{session('coupon_error')}}</span>
+                                            <span class="text-danger">{{ session('coupon_error') }}</span>
                                         @endif
                                     </div>
                                 </div>
@@ -127,10 +128,11 @@
                                     <h3>Cart Totals</h3>
                                     <ul>
                                         @php
+                                            Session::put('s_coupon_code', $coupon);
                                             Session::put('s_cart_total', $cart_total);
                                             Session::put('s_discount', $discount);
                                             Session::put('s_subtotal', $cart_total - $discount);
-                                            // Session::put('s_delivery', 30);
+                                            Session::put('s_shipping', 30);
                                         @endphp
                                         <li>
                                             <span class="pull-left">Cart total </span>$ {{ $cart_total }}
@@ -148,20 +150,23 @@
                                         </li>
 
                                         <div class="mt-5">
-                                            <p class="d-flex mb-2" style="font-size:18px;font-weight:500">Delivery</p>
+                                            <p class="d-flex mb-2" style="font-size:18px;font-weight:500">Shipping</p>
                                             <ul>
                                                 <li class="mb-1">
-                                                    <input id="radio-one" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
-                                                    <span class="pull-left" style="font-size: 15px;">Urgent</span>
+                                                    <input id="radio-one" class="radio-btn pull-left mx-3"
+                                                        style="margin: 0.4rem" type="radio" name="shipping">
+                                                    <span class="pull-left" style="font-size: 15px;">Express</span>
                                                     $50
                                                 </li>
                                                 <li class="mb-1" style="font-weight:500;font-size:15px">
-                                                    <input checked id="radio-two" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
+                                                    <input checked id="radio-two" class="radio-btn pull-left mx-3"
+                                                        style="margin: 0.4rem" type="radio" name="shipping">
                                                     <span class="pull-left" style="font-size: 15px;">Standard</span>
                                                     $30
                                                 </li>
                                                 <li class="mb-1" style="font-weight:500;font-size:15px">
-                                                    <input id="radio-three" class="radio-btn pull-left mx-3" style="margin: 0.4rem" type="radio" name="delivery">
+                                                    <input id="radio-three" class="radio-btn pull-left mx-3"
+                                                        style="margin: 0.4rem" type="radio" name="shipping">
                                                     <span class="pull-left" style="font-size: 15px;">Free</span>
                                                     $0
                                                 </li>
@@ -171,9 +176,9 @@
                                         <hr class="my-4" style="background-color: #a7a7a7">
 
                                         <li class="text-danger">
-                                            <span class="pull-left"> Grand Total </span> 
+                                            <span class="pull-left"> Grand Total </span>
                                             $
-                                            <span id="grandtotal">{{ ($cart_total - $discount) + 30 }}</span>
+                                            <span id="grandtotal">{{ $cart_total - $discount + 30 }}</span>
                                         </li>
                                     </ul>
 
@@ -209,26 +214,26 @@
 
 @section('script-content')
     <script>
-        $('document').ready(function(){
+        $('document').ready(function() {
 
-            $('#radio-one').click(function(){
-                $('#grandtotal').html(parseInt($('#subtotal').html())+50);
+            $('#radio-one').click(function() {
+                $('#grandtotal').html(parseInt($('#subtotal').html()) + 50);
                 @php
-                    Session::put('s_delivery', 50);
+                    Session::put('s_shipping', 50);
                 @endphp
             });
 
-            $('#radio-two').click(function(){
-                $('#grandtotal').html(parseInt($('#subtotal').html())+30);
+            $('#radio-two').click(function() {
+                $('#grandtotal').html(parseInt($('#subtotal').html()) + 30);
                 @php
-                    Session::put('s_delivery', 30);
+                    Session::put('s_shipping', 30);
                 @endphp
             });
 
-            $('#radio-three').click(function(){
-                $('#grandtotal').html(parseInt($('#subtotal').html())+0);
+            $('#radio-three').click(function() {
+                $('#grandtotal').html(parseInt($('#subtotal').html()) + 0);
                 @php
-                    Session::put('s_delivery', 10);
+                    Session::put('s_shipping', 0);
                 @endphp
             });
         });

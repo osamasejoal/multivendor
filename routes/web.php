@@ -7,6 +7,9 @@ use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
 
+// For payment gateway method
+use App\Http\Controllers\SslCommerzPaymentController;
+
 
 Auth::routes();
 
@@ -176,6 +179,7 @@ Route::resource('coupon', CouponController::class);
 */
 Route::get('/check/out', [CheckoutController::class, 'view'])->name('checkout');
 Route::post('/check/out', [CheckoutController::class, 'checkoutPost'])->name('checkout.post');
+Route::post('/city/list', [CheckoutController::class, 'cityList'])->name('city.list');
 
 
 
@@ -193,4 +197,25 @@ Route::get('/add/city', [AreaController::class, 'addCity'])->name('city.add');
 Route::post('/store/city', [AreaController::class, 'storeCity'])->name('city.store');
 Route::get('/view/cities', [AreaController::class, 'viewCities'])->name('city.view');
 Route::post('/destroy/cities/{id}', [AreaController::class, 'destroyCities'])->name('city.destroy');
+
+
+
+/*
+|--------------------------------------------------------------------------
+| SslCommerzPaymentController (for payment gateway)
+|--------------------------------------------------------------------------
+*/
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::get('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
