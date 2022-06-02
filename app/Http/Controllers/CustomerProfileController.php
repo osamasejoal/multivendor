@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Str;
 
-class ProfileController extends Controller
+class CustomerProfileController extends Controller
 {
     
 
@@ -16,38 +17,38 @@ class ProfileController extends Controller
 
     /*
     |--------------------------------------------------------------------------
-    |                              INDEX METHOD
+    |                         MY PROFILE METHOD
     |--------------------------------------------------------------------------
     */
-    public function index(){
-        return view('backend.profile.view');
+    public function myProfile(){
+        return view('frontend.profile.my-profile');
     }
-
+    
 
 
 
 
     /*
     |--------------------------------------------------------------------------
-    |                              UPDATE METHOD
+    |                         UPDATE MY PROFILE METHOD
     |--------------------------------------------------------------------------
     */
-    public function update(Request $request){
-
+    public function updateMyProfile(Request $request){
+        
         $request->validate([
             'name' => 'required',
-            'email' => 'required | email',
-            'image' => 'image | mimes:png,jpg,jpeg',
+            'email' => 'required|email',
+            'image' => 'image|mimes:png,jpg,jpeg',
         ], [
-            'name.required' => 'Name is required',
-            'email.required' => 'Email is required',
-            'email.email' => 'Please enter a valid email',
-            'image.image' => 'Please choose a image file',
-            'image.mimes' => 'It can be png, jpg or jpeg file',
+            'name.required' => "This field is required",
+            'email.required' => "This field is required",
+            'email.email' => "Please enter a valid email",
+            'image.image' => "Please choose a image",
+            'image.mimes' => "We allow png,jpg & jpeg",
         ]);
-        
+
         if ($request->hasFile('image')) {
-            if (auth()->user()->image != 'default.png') {
+            if (auth()->user()->image != 'default.png' ) {
                 unlink(base_path('public/backend/assets/images/profile-pic/' . $request->image));
             }
             $img = Image::make($request->image);
@@ -58,14 +59,13 @@ class ProfileController extends Controller
                 'image' => $img_name,
             ]);
         }
-        
 
         User::find(auth()->id())->update([
             'name' => $request->name,
             'email' => $request->email,
         ]);
 
-        return back()->with('success', "Successfully updated your data");
+        return back()->with('success', 'Successfully updated your profile');
     }
-    
+
 }

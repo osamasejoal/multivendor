@@ -99,10 +99,10 @@
                                             alt=""> My Account <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
 
-                                        @if (auth()->user()->roll == 3)
-                                            <li><a href="{{ route('customer.profile.update') }}">Profile</a></li>
-                                        @else
+                                        @if (auth()->user()->roll == 1 || auth()->user()->roll == 2)
                                             <li><a href="{{ route('home') }}">Dashboard</a></li>
+                                        @elseif (auth()->user()->roll == 3)
+                                            <li><a href="{{ route('my.profile') }}">Profile</a></li>
                                         @endif
 
                                         <li><a href="{{ route('view.wishlist') }}">wishlist</a></li>

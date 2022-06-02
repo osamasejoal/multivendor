@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CouponController, CheckoutController, AreaController};
+use App\Http\Controllers\{CartController, HomeController, ProfileController, FrontendController, CategoryController, SubCategoryController, ProductController, WishlistController, CompanyInfoController, CompanySocialController, BannerController, TestimonialController, VendorController, CustomerController, CustomerProfileController, CouponController, CheckoutController, AreaController};
 use App\Models\SubCategory;
 use Facade\FlareClient\Http\Response;
 use Symfony\Component\Console\Input\Input;
@@ -31,7 +31,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 */
 Route::get('/users/profile', [ProfileController::class, 'index'])->name('profile.index');
 Route::post('/users/profile/update', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/customer/profile/update', [ProfileController::class, 'customer_profile'])->name('customer.profile.update');
 
 
 
@@ -160,6 +159,16 @@ Route::resource('vendor', VendorController::class);
 |--------------------------------------------------------------------------
 */
 Route::resource('customer', CustomerController::class);
+
+
+
+/*
+|--------------------------------------------------------------------------
+| CustomerProfileController
+|--------------------------------------------------------------------------
+*/
+Route::get('my/profile', [CustomerProfileController::class, 'myProfile'])->name('my.profile');
+Route::post('update/my/profile', [CustomerProfileController::class, 'updateMyProfile'])->name('update.my.profile');
 
 
 
