@@ -170,6 +170,8 @@ Route::resource('customer', CustomerController::class);
 Route::get('my/profile', [CustomerProfileController::class, 'myProfile'])->name('my.profile');
 Route::post('update/my/profile', [CustomerProfileController::class, 'updateMyProfile'])->name('update.my.profile');
 
+Route::get('/my/orders', [CustomerProfileController::class, 'myOrders'])->name('my.orders');
+
 
 
 /*

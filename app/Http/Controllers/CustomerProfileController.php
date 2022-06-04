@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderSummary;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Laravel\Ui\Presets\React;
@@ -66,6 +67,20 @@ class CustomerProfileController extends Controller
         ]);
 
         return back()->with('success', 'Successfully updated your profile');
+    }
+    
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                            MY ORDERS METHOD
+    |--------------------------------------------------------------------------
+    */
+    public function myOrders(){
+        $order_summaries = OrderSummary::where('user_id', auth()->id())->get();
+        return view('frontend.profile.my-orders', compact('order_summaries'));
     }
 
 }

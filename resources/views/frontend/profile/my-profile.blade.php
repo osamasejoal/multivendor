@@ -7,8 +7,8 @@
 
                 <div class="card border-primary" style="min-height: 50vh">
                     <div class="card-body">
-                        <a href="#" class="d-block mb-3" style="font-size:20px;font-weight:500">My Profile</a>
-                        <a href="#" class="d-block mb-3" style="font-size:20px;font-weight:500">My Orders</a>
+                        <a href="{{route('my.profile')}}" class="d-block mb-3" style="font-size:20px;font-weight:600">My Profile</a>
+                        <a href="{{route('my.orders')}}" class="d-block mb-3" style="font-size:20px;">My Orders</a>
                     </div>
                 </div>
             </div>
