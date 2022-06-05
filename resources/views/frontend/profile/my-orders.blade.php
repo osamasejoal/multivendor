@@ -51,9 +51,10 @@
                                         <a class="mr-3" href="#" style="font-size:25px;">
                                             <abbr title="Order Details"><i class="fa fa-info-circle"></i></abbr>
                                         </a>
-                                        <a href="#" style="font-size:25px;">
+                                        <a href="{{route('download.invoice', $order_summary->id)}}" style="font-size:25px;">
                                             <abbr title="Download Invoice"><i class="fa fa-file-pdf-o"></i></abbr>
                                         </a>
+                                        <a href="{{route('pdf.view', $order_summary->id )}}">view</a>
                                     </td>
                                 </tr>
                             @empty

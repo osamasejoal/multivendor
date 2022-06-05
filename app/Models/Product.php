@@ -29,4 +29,17 @@ class Product extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                         RELATION WITH ORDER DETAILS
+    |--------------------------------------------------------------------------
+    */
+    public function order_detail()
+    {
+        return $this->hasOne(OrderDetail::class);
+    }
+
 }

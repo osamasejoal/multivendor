@@ -171,6 +171,8 @@ Route::get('my/profile', [CustomerProfileController::class, 'myProfile'])->name(
 Route::post('update/my/profile', [CustomerProfileController::class, 'updateMyProfile'])->name('update.my.profile');
 
 Route::get('/my/orders', [CustomerProfileController::class, 'myOrders'])->name('my.orders');
+Route::get('/invoice/download/{id}', [CustomerProfileController::class, 'downloadInvoice'])->name('download.invoice');
+Route::get('/pdf/view/{id}', [CustomerProfileController::class, 'pdfView'])->name('pdf.view');
 
 
 

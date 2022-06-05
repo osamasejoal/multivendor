@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Country extends Model
 {
     use HasFactory;
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                         RELATION WITH BILLING DETAIL
+    |--------------------------------------------------------------------------
+    */
+    public function billing_detail()
+    {
+        return $this->belongsTo(BillingDetail::class);
+    }
 }

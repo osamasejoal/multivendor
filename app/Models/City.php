@@ -13,4 +13,17 @@ class City extends Model
     {
         return $this->hasOne(Country::class, 'id', 'country_id');
     }
+
+
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |                         RELATION WITH BILLING DETAIL
+    |--------------------------------------------------------------------------
+    */
+    public function billing_detail()
+    {
+        return $this->belongsTo(BillingDetail::class);
+    }
 }
