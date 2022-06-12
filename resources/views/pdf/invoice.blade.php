@@ -45,6 +45,9 @@
         .row {
             display: flex;
             flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-between;
+            position: relative;
         }
 
         .col-6 {
@@ -108,7 +111,7 @@
         }
 
         .text-right {
-            text-align: end;
+            text-align: right;
         }
 
         .w-20 {
@@ -125,19 +128,19 @@
 <body>
 
     <div class="container">
-        <div class="brand-section">
-            <div class="row">
-                <div class="col-6">
+        <div class="brand-section" style="background-color:#111;position:relative">
+            {{-- <div class="row"> --}}
+                <div class="">
                     <h1 class="text-white">{{ company_data()->name }}</h1>
                 </div>
-                <div class="col-6">
-                    <div class="company-details">
+                <div class="">
+                    <div class="">
                         <p class="text-white">{{ company_data()->email }}</p>
                         <p class="text-white">{{ company_data()->address }}</p>
                         <p class="text-white">{{ company_data()->phone }}</p>
                     </div>
                 </div>
-            </div>
+            {{-- </div> --}}
         </div>
 
         <div class="body-section">

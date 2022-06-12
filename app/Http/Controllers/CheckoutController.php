@@ -110,7 +110,7 @@ class CheckoutController extends Controller
         }
 
         if ($request->payment_option == 1) {
-            return redirect('/home');
+            return redirect('/my/orders');
         } else {
             Session::put('s_order_summary_id', $order_summary_id);
             return redirect('/pay');
